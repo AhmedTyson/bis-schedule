@@ -1,0 +1,1422 @@
+[
+  {
+    "subject": "Auditing",
+    "group": "G1",
+    "doctorAr": "د. حنان جابر",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "dp45mtq",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G2",
+    "doctorAr": "د. حنان جابر",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "i6keet2",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G3",
+    "doctorAr": "د. حنان جابر",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "xykdety",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G4",
+    "doctorAr": "د. حنان جابر",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "9w4xny1",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G5",
+    "doctorAr": "د. حنان جابر",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "ncw8t8v",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G6",
+    "doctorAr": "د. حنان جابر",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "x5clkey",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G7",
+    "doctorAr": "د. حنان جابر",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "jlw11zf",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G8",
+    "doctorAr": "د. حنان جابر",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "ld9d46h",
+    "doctorEn": "Dr. Hanan Gaber",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G9",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Saturday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "gl5nd6w",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G10",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Saturday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "n4j7lm2",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G11",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Saturday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "a7a83iq",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G12",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "uxxv9qu",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G13",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "6tyet47",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G14",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Sunday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "vhplgat",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G15",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "c8knul9",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G16",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "harcdfu",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G17",
+    "doctorAr": "د. اشرف منصور",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "gcow3hx",
+    "doctorEn": "Dr. Ashraf Mansour",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G18",
+    "doctorAr": "د. ايمان سعد الدين",
+    "day": "Saturday",
+    "time": "04:00 PM – 06:00 PM",
+    "code": "z6n5thl",
+    "doctorEn": "Dr. Eman Saad El-Din",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G19",
+    "doctorAr": "د. ايمان سعد الدين",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "uodb1jj",
+    "doctorEn": "Dr. Eman Saad El-Din",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G20",
+    "doctorAr": "د. ايمان سعد الدين",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "3p1x7yy",
+    "doctorEn": "Dr. Eman Saad El-Din",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G21",
+    "doctorAr": "د. ايمان سعد الدين",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "hcxbo4l",
+    "doctorEn": "Dr. Eman Saad El-Din",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G22",
+    "doctorAr": "د. حمدي السعيد",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "fuyz9b6",
+    "doctorEn": "Dr. Hamdy El-Said",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G23",
+    "doctorAr": "د. حمدي السعيد",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "cg11jye",
+    "doctorEn": "Dr. Hamdy El-Said",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Auditing",
+    "group": "G24",
+    "doctorAr": "د. حمدي السعيد",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "rmvypwb",
+    "doctorEn": "Dr. Hamdy El-Said",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G1",
+    "doctorAr": "د. يحيي حلمي",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "mzypuv2",
+    "doctorEn": "Dr. Yehia Helmy",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G2",
+    "doctorAr": "د. يحيي حلمي",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "299ae1k",
+    "doctorEn": "Dr. Yehia Helmy",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G3",
+    "doctorAr": "د. يحيي حلمي",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "hwzk4ja",
+    "doctorEn": "Dr. Yehia Helmy",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G4",
+    "doctorAr": "د. كريستينا",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "bogtbag",
+    "doctorEn": "Dr. Kristina Albert",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G5",
+    "doctorAr": "د. كريستينا",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "m07dr7b",
+    "doctorEn": "Dr. Kristina Albert",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G6",
+    "doctorAr": "د. كريستينا",
+    "day": "Sunday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "ysowp50",
+    "doctorEn": "Dr. Kristina Albert",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G7",
+    "doctorAr": "د. شيرين طايع",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "uk0k445",
+    "doctorEn": "Dr. Sherien Tayea",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G8",
+    "doctorAr": "د. شيرين طايع",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "p2hmpej",
+    "doctorEn": "Dr. Sherien Tayea",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G9",
+    "doctorAr": "د. شيرين طايع",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "c205ye9",
+    "doctorEn": "Dr. Sherien Tayea",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G10",
+    "doctorAr": "د. احمد منير",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "rq0nrk6",
+    "doctorEn": "Dr. Ahmed Monir",
+    "room": "Hall 9"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G11",
+    "doctorAr": "د. احمد منير",
+    "day": "Saturday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "vajoidm",
+    "doctorEn": "Dr. Ahmed Monir",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G12",
+    "doctorAr": "د. احمد منير",
+    "day": "Saturday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "3g0pxws",
+    "doctorEn": "Dr. Ahmed Monir",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G13",
+    "doctorAr": "د. احمد منير",
+    "day": "Saturday",
+    "time": "04:00 PM – 06:00 PM",
+    "code": "xf42b0r",
+    "doctorEn": "Dr. Ahmed Monir",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G14",
+    "doctorAr": "د. داليا",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "c73y1dc",
+    "doctorEn": "Dr. Dalia Magdy",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G15",
+    "doctorAr": "د. داليا",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "xzq87j0",
+    "doctorEn": "Dr. Dalia Magdy",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G16",
+    "doctorAr": "د. داليا",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "h22h64j",
+    "doctorEn": "Dr. Dalia Magdy",
+    "room": "Hall 17"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G17",
+    "doctorAr": "د. بيشوي",
+    "day": "Saturday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "snomrgg",
+    "doctorEn": "Dr. Bishoy",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G18",
+    "doctorAr": "د. بيشوي",
+    "day": "Saturday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "sqqo3ju",
+    "doctorEn": "Dr. Bishoy",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G19",
+    "doctorAr": "د. بيشوي",
+    "day": "Saturday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "mr6t343",
+    "doctorEn": "Dr. Bishoy",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G20",
+    "doctorAr": "د. دينا هلال",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "ujanp32",
+    "doctorEn": "Dr. Dina Helal",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G21",
+    "doctorAr": "د. دينا هلال",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "4fnbzqs",
+    "doctorEn": "Dr. Dina Helal",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Management Information Systems",
+    "group": "G22",
+    "doctorAr": "د. دينا هلال",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "ojhwn3j",
+    "doctorEn": "Dr. Dina Helal",
+    "room": "Hall 21"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G1",
+    "doctorAr": "د. احمد السيداوي",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "ab5fv6j",
+    "doctorEn": "Dr. Ahmed El-Saidawy",
+    "room": "Hall 2"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G2",
+    "doctorAr": "د. احمد السيداوي",
+    "day": "Monday",
+    "time": "04:00 PM – 06:00 PM",
+    "code": "zlqlsph",
+    "doctorEn": "Dr. Ahmed El-Saidawy",
+    "room": "Hall 2"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G3",
+    "doctorAr": "د. احمد السيداوي",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "zjcvmri",
+    "doctorEn": "Dr. Ahmed El-Saidawy",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G4",
+    "doctorAr": "د. احمد السيداوي",
+    "day": "Thursday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "35d2tlw",
+    "doctorEn": "Dr. Ahmed El-Saidawy",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G5",
+    "doctorAr": "د. إبراهيم الدسوقي",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "cerl280",
+    "doctorEn": "Dr. Ibrahim El-Desouky",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G6",
+    "doctorAr": "د. إبراهيم الدسوقي",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "cnemwpa",
+    "doctorEn": "Dr. Ibrahim El-Desouky",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G7",
+    "doctorAr": "د. إبراهيم الدسوقي",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "8hb8f5z",
+    "doctorEn": "Dr. Ibrahim El-Desouky",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G8",
+    "doctorAr": "د. إبراهيم الدسوقي",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "7u971gi",
+    "doctorEn": "Dr. Ibrahim El-Desouky",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G9",
+    "doctorAr": "د. محمد حسن",
+    "day": "Saturday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "lzvcyuv",
+    "doctorEn": "Dr. Mohamed Hassan",
+    "room": "Hall 15"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G10",
+    "doctorAr": "د. محمد حسن",
+    "day": "Saturday",
+    "time": "04:00 PM – 06:00 PM",
+    "code": "rit1ua2",
+    "doctorEn": "Dr. Mohamed Hassan",
+    "room": "Hall 15"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G11",
+    "doctorAr": "د. محمد حسن",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "gbt7gdk",
+    "doctorEn": "Dr. Mohamed Hassan",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G12",
+    "doctorAr": "د. محمد حسن",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "4blhhbd",
+    "doctorEn": "Dr. Mohamed Hassan",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G13",
+    "doctorAr": "د. هاني جودة",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "ecci9d7",
+    "doctorEn": "Dr. Hany Gouda",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G14",
+    "doctorAr": "د. هاني جودة",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "rqebaka",
+    "doctorEn": "Dr. Hany Gouda",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G15",
+    "doctorAr": "د. هاني جودة",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "m78xunj",
+    "doctorEn": "Dr. Hany Gouda",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G16",
+    "doctorAr": "د. ميرا تامر",
+    "day": "Tuesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "9yzajdt",
+    "doctorEn": "Dr. Mira Tamer",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G17",
+    "doctorAr": "د. ميرا تامر",
+    "day": "Tuesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "pa4ysrw",
+    "doctorEn": "Dr. Mira Tamer",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G18",
+    "doctorAr": "د. ميرا تامر",
+    "day": "Tuesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "de3kqzo",
+    "doctorEn": "Dr. Mira Tamer",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G19",
+    "doctorAr": "د. ياسر الجداوي",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "bgvr7y9",
+    "doctorEn": "Dr. Yasser El-Gedawy",
+    "room": "Hall 15"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G20",
+    "doctorAr": "د. ياسر الجداوي",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "5mlo5lj",
+    "doctorEn": "Dr. Yasser El-Gedawy",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G21",
+    "doctorAr": "د. ياسر الجداوي",
+    "day": "Wednesday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "l2w8v25",
+    "doctorEn": "Dr. Yasser El-Gedawy",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G22",
+    "doctorAr": "د. ياسر الجداوي",
+    "day": "Wednesday",
+    "time": "04:00 PM – 06:00 PM",
+    "code": "5xuoa52",
+    "doctorEn": "Dr. Yasser El-Gedawy",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G23",
+    "doctorAr": "د. منه ممدوح",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "7wxocbg",
+    "doctorEn": "Dr. Menna Mamdouh",
+    "room": "Hall 16"
+  },
+  {
+    "subject": "Advanced Database",
+    "group": "G24",
+    "doctorAr": "د. منه ممدوح",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "8dfvet2",
+    "doctorEn": "Dr. Menna Mamdouh",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G1",
+    "doctorAr": "د. مرتضى صلاح الدين",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "3v0msbt",
+    "doctorEn": "Dr. Mortada Salah El-Din",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G2",
+    "doctorAr": "د. مرتضى صلاح الدين",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "h5os5po",
+    "doctorEn": "Dr. Mortada Salah El-Din",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G3",
+    "doctorAr": "د. مرتضى صلاح الدين",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "d0p5m18",
+    "doctorEn": "Dr. Mortada Salah El-Din",
+    "room": "Hall 18"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G4",
+    "doctorAr": "د. إبراهيم زغلول",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "lob88u1",
+    "doctorEn": "Dr. Ibrahim Zaghloul",
+    "room": "Hall 19"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G5",
+    "doctorAr": "د. إبراهيم زغلول",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "0dtycdi",
+    "doctorEn": "Dr. Ibrahim Zaghloul",
+    "room": "Hall 19"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G6",
+    "doctorAr": "د. إبراهيم زغلول",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "g5o7vpd",
+    "doctorEn": "Dr. Ibrahim Zaghloul",
+    "room": "Hall 19"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G7",
+    "doctorAr": "د. اماني احمد",
+    "day": "Saturday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "gat6p30",
+    "doctorEn": "Dr. Amany Ahmed",
+    "room": "Hall 14"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G8",
+    "doctorAr": "د. اماني احمد",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "bp3u0x1",
+    "doctorEn": "Dr. Amany Ahmed",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G9",
+    "doctorAr": "د. اماني احمد",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "42du7s7",
+    "doctorEn": "Dr. Amany Ahmed",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G10",
+    "doctorAr": "د. اماني احمد",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "w96k7it",
+    "doctorEn": "Dr. Amany Ahmed",
+    "room": "Hall 12"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G11",
+    "doctorAr": "د. ثناء محمد",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "2uwpdpw",
+    "doctorEn": "Dr. Thanaa Mohamed",
+    "room": "Hall 22"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G12",
+    "doctorAr": "د. ثناء محمد",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "c3iw5c0",
+    "doctorEn": "Dr. Thanaa Mohamed",
+    "room": "Hall 22"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G13",
+    "doctorAr": "د. ثناء محمد",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "j4me9m9",
+    "doctorEn": "Dr. Thanaa Mohamed",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G14",
+    "doctorAr": "د. ثناء محمد",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "uw5h1fn",
+    "doctorEn": "Dr. Thanaa Mohamed",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G15",
+    "doctorAr": "د. نانيس نبيل",
+    "day": "Tuesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "d12fkfu",
+    "doctorEn": "Dr. Nanis Nabil",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G16",
+    "doctorAr": "د. نانيس نبيل",
+    "day": "Tuesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "s72bs58",
+    "doctorEn": "Dr. Nanis Nabil",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G17",
+    "doctorAr": "د. نانيس نبيل",
+    "day": "Thursday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "cov8pu2",
+    "doctorEn": "Dr. Nanis Nabil",
+    "room": "Hall 16"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G18",
+    "doctorAr": "د. نانيس نبيل",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "m53h9ch",
+    "doctorEn": "Dr. Nanis Nabil",
+    "room": "Hall 16"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G19",
+    "doctorAr": "د. نورا شعيب",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "j4y12uv",
+    "doctorEn": "Dr. Noura Shoeib",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G20",
+    "doctorAr": "د. نورا شعيب",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "29wm6uv",
+    "doctorEn": "Dr. Noura Shoeib",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G21",
+    "doctorAr": "د. نورا شعيب",
+    "day": "Thursday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "dq97r49",
+    "doctorEn": "Dr. Noura Shoeib",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G22",
+    "doctorAr": "د. ايمان حنفي",
+    "day": "Saturday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "tqx7d7q",
+    "doctorEn": "Dr. Eman Hanafy",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G23",
+    "doctorAr": "د. ايمان حنفي",
+    "day": "Saturday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "5pucld7",
+    "doctorEn": "Dr. Eman Hanafy",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Internet Applications",
+    "group": "G24",
+    "doctorAr": "د. ايمان حنفي",
+    "day": "Saturday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "uarpavh",
+    "doctorEn": "Dr. Eman Hanafy",
+    "room": "Hall 24"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G1",
+    "doctorAr": "د. احمد عبد الهادي",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "iw9a8ac",
+    "doctorEn": "Dr. Ahmed Abdelhady",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G2",
+    "doctorAr": "د. احمد عبد الهادي",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "r0wb41r",
+    "doctorEn": "Dr. Ahmed Abdelhady",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G3",
+    "doctorAr": "د. احمد عبد الهادي",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "28yykz0",
+    "doctorEn": "Dr. Ahmed Abdelhady",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G4",
+    "doctorAr": "د. احمد عبد الهادي",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "4mdi80z",
+    "doctorEn": "Dr. Ahmed Abdelhady",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G5",
+    "doctorAr": "د. احمد عبد الهادي",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "gdrvnyv",
+    "doctorEn": "Dr. Ahmed Abdelhady",
+    "room": "Hall 1"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G6",
+    "doctorAr": "د. هند عطيه",
+    "day": "Tuesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "y1meizl",
+    "doctorEn": "Dr. Hend Atiya",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G7",
+    "doctorAr": "د. هند عطيه",
+    "day": "Tuesday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "9zmszjb",
+    "doctorEn": "Dr. Hend Atiya",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G8",
+    "doctorAr": "د. هند عطيه",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "06apxiv",
+    "doctorEn": "Dr. Hend Atiya",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G9",
+    "doctorAr": "د. هند عطيه",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "rmbp399",
+    "doctorEn": "Dr. Hend Atiya",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G10",
+    "doctorAr": "د. هند عطيه",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "r91rqxr",
+    "doctorEn": "Dr. Hend Atiya",
+    "room": "Hall 25"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G11",
+    "doctorAr": "د. محمود صادق",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "f7dn8bu",
+    "doctorEn": "Dr. Mahmoud Sadek",
+    "room": "Hall 22"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G12",
+    "doctorAr": "د. محمود صادق",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "451zgnn",
+    "doctorEn": "Dr. Mahmoud Sadek",
+    "room": "Hall 22"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G13",
+    "doctorAr": "د. محمود صادق",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "zms4ll5",
+    "doctorEn": "Dr. Mahmoud Sadek",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G14",
+    "doctorAr": "د. محمود صادق",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "2bpw4k5",
+    "doctorEn": "Dr. Mahmoud Sadek",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G15",
+    "doctorAr": "د. غاده طه",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "jgrp9nj",
+    "doctorEn": "Dr. Ghada Taha",
+    "room": "Hall 8"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G16",
+    "doctorAr": "د. غاده طه",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "0z80zuz",
+    "doctorEn": "Dr. Ghada Taha",
+    "room": "Hall 8"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G17",
+    "doctorAr": "د. غاده طه",
+    "day": "Sunday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "nbrbptw",
+    "doctorEn": "Dr. Ghada Taha",
+    "room": "Hall 8"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G18",
+    "doctorAr": "د. غاده طه",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "s8ntlkm",
+    "doctorEn": "Dr. Ghada Taha",
+    "room": "Hall 11"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G19",
+    "doctorAr": "د. خالد محمد",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "7gw3v63",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G20",
+    "doctorAr": "د. خالد محمد",
+    "day": "Monday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "iee5ujh",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 6"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G21",
+    "doctorAr": "د. خالد محمد",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "jx7tkx6",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 23"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G22",
+    "doctorAr": "د. خالد محمد",
+    "day": "Thursday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "ls4gzvv",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G23",
+    "doctorAr": "د. خالد محمد",
+    "day": "Thursday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "yx80g7l",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Operations Research",
+    "group": "G24",
+    "doctorAr": "د. خالد محمد",
+    "day": "Thursday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "ij27gbz",
+    "doctorEn": "Dr. Khaled Mohamed",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G1",
+    "doctorAr": "د. عمر سالمان",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "8udkg43",
+    "doctorEn": "Dr. Omar Salman",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G2",
+    "doctorAr": "د. عمر سالمان",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "tnax6kj",
+    "doctorEn": "Dr. Omar Salman",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G3",
+    "doctorAr": "د. عمر سالمان",
+    "day": "Wednesday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "oizv2td",
+    "doctorEn": "Dr. Omar Salman",
+    "room": "Hall 3"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G4",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Saturday",
+    "time": "02:00 PM – 04:00 PM",
+    "code": "cci163o",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G5",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "tjq7t8c",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G6",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "wjqqckm",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G7",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Sunday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "vzoj9gz",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G8",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "5q7gqse",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G9",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "r5xbrjf",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G10",
+    "doctorAr": "د. سمية عبد المولي",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "e44gp7m",
+    "doctorEn": "Dr. Somaya Abdelmouly",
+    "room": "Hall 4"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G11",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Sunday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "oylyot7",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G12",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Sunday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "le2xny0",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G13",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Sunday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "j555jgj",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G14",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "3iypem7",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G15",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "l97oshc",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G16",
+    "doctorAr": "د. رشا الكردي",
+    "day": "Monday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "u3uh8qp",
+    "doctorEn": "Dr. Rasha El-Kurdy",
+    "room": "Hall 5"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G17",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Saturday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "5xb1hu5",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G18",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Saturday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "bx3zp2s",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G19",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Saturday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "id9i1wj",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 13"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G20",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Monday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "bhq4pmj",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G21",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Monday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "ts01z1i",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G22",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Wednesday",
+    "time": "08:00 AM – 10:00 AM",
+    "code": "ei3re8z",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G23",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Wednesday",
+    "time": "10:00 AM – 12:00 PM",
+    "code": "c84awau",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 10"
+  },
+  {
+    "subject": "Economics of Information",
+    "group": "G24",
+    "doctorAr": "د. شيماء وهبه",
+    "day": "Wednesday",
+    "time": "12:00 PM – 02:00 PM",
+    "code": "i6558wp",
+    "doctorEn": "Dr. Shaimaa Wahba",
+    "room": "Hall 10"
+  }
+]

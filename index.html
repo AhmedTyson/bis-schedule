@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule Search | BIS</title>
+
+    <!-- Strict Cache Control -->
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- Social Sharing Meta Tags (Open Graph) -->
+    <meta property="og:title" content="BIS Schedule Search | Level 3" />
+    <meta
+      property="og:description"
+      content="Quickly find your BIS schedule: filters for subjects, groups, and doctors. Modern, fast, and mobile-friendly."
+    />
+    <meta property="og:url" content="https://bis-schedule.netlify.app" />
+    <meta property="og:type" content="website" />
+    <meta
+      name="description"
+      content="Quickly find your BIS schedule: filters for subjects, groups, and doctors. Modern, fast, and mobile-friendly."
+    />
+
+    <meta
+      property="og:image"
+      content="https://bis-schedule.netlify.app/preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BIS Schedule Search" />
+    <meta
+      name="twitter:description"
+      content="Quickly find your BIS schedule with filters and search."
+    />
+    <meta
+      name="twitter:image"
+      content="https://bis-schedule.netlify.app/preview.png"
+    />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://api.iconify.design/fa-solid:calendar-check.svg?color=%23a855f7"
+    />
+
+    <meta name="robots" content="index, follow" />
+    <!-- SEO Boost -->
+
+    <!-- Preloading disabled to resolve console credential/unused warnings -->
+    <!-- Sub-modules are imported by app.js, allowing browser to discover them naturally to avoid 'unused' warnings -->
+
+    <!-- CSS Preloads (All components to prevent blocking) -->
+    <!-- CSS Sheets -->
+    <!-- CSS Sheets -->
+    <link rel="stylesheet" href="css/base/variables.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/base/reset.css?v=2" />
+    <link rel="stylesheet" href="css/layout/layout.css?v=2" />
+    <link rel="stylesheet" href="css/components/search.css?v=2" />
+    <link rel="stylesheet" href="css/components/table.css?v=2" />
+    <link rel="stylesheet" href="css/components/inputs.css?v=2" />
+    <link rel="stylesheet" href="css/components/tags.css?v=2" />
+    <link rel="stylesheet" href="css/components/pagination.css?v=2" />
+    <link rel="stylesheet" href="css/components/utilities.css?v=2" />
+    <link rel="stylesheet" href="css/components/buttons.css?v=2" />
+    <link rel="stylesheet" href="css/components/live-dashboard.css?v=2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet"
+    /></noscript>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    /></noscript>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0" defer></script>
+  </head>
+  <body>
+    <div id="loader">
+      <i class="fa-solid fa-snowflake snowflake-spinner"></i>
+    </div>
+
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="brand-logo">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div class="brand-info">
+            <h1>
+              BIS Schedule Search<span class="brand-badge">Made by Tyson</span>
+            </h1>
+            <span
+              >Level 3 • semester 2<span id="ramadan-indicator" class="hidden">
+                • <i class="fa-solid fa-moon"></i> Ramadan Timing</span
+              ><span id="academic-indicator" class="hidden">
+                • <i class="fa-solid fa-school"></i>
+                <span id="academic-text"></span></span
+            ></span>
+          </div>
+        </div>
+        <div class="view-switcher" id="view-switcher">
+          <button class="toggle-btn active" data-view="schedule">
+            <i class="fa-solid fa-list"></i> Schedule
+          </button>
+          <button class="toggle-btn" data-view="live">
+            <i class="fa-solid fa-bolt"></i> Live
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="controls">
+          <div id="schedule-controls" class="view-controls">
+            <div class="search-header">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search by subject, doctor, group, day, time or code..."
+                  aria-label="Search Schedule"
+                />
+              </div>
+
+              <button
+                id="clear-filters"
+                class="btn-secondary clear-btn-styled"
+                aria-label="Clear All Filters"
+              >
+                <i class="fa-solid fa-filter-circle-xmark"></i> Clear All
+              </button>
+              <div class="stats-bar">
+                <span class="stats-text"
+                  ><span id="result-count">0</span> Results Found</span
+                >
+              </div>
+            </div>
+
+            <div class="filters-grid">
+              <div class="filter-group">
+                <span id="lbl-subject" class="input-label"
+                  ><i class="fa-solid fa-book"></i> Subject</span
+                >
+                <div
+                  class="custom-select"
+                  id="subject-dropdown"
+                  role="combobox"
+                  aria-labelledby="lbl-subject"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-controls="subject-options"
+                >
+                  <div
+                    class="select-trigger"
+                    aria-labelledby="lbl-subject"
+                    aria-label="Select Subject"
+                    tabindex="0"
+                  >
+                    <span>All Subjects</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options" id="subject-options">
+                    <div class="option selected" data-value="all">
+                      All Subjects
+                    </div>
+                  </div>
+                </div>
+                <select id="subject-filter" class="hidden" aria-hidden="true">
+                  <option value="all">All Subjects</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <span id="lbl-group" class="input-label"
+                  ><i class="fa-solid fa-users"></i> Group</span
+                >
+                <div
+                  class="custom-select"
+                  id="group-dropdown"
+                  role="combobox"
+                  aria-labelledby="lbl-group"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-controls="group-options"
+                >
+                  <div
+                    class="select-trigger"
+                    aria-labelledby="lbl-group"
+                    aria-label="Select Group"
+                    tabindex="0"
+                  >
+                    <span>All Groups</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options" id="group-options">
+                    <div class="option selected" data-value="all">
+                      All Groups
+                    </div>
+                  </div>
+                </div>
+                <select id="group-filter" class="hidden" aria-hidden="true">
+                  <option value="all">All Groups</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <span id="lbl-day" class="input-label"
+                  ><i class="fa-solid fa-calendar-day"></i> Day</span
+                >
+                <div
+                  class="custom-select"
+                  id="day-dropdown"
+                  role="combobox"
+                  aria-labelledby="lbl-day"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-controls="day-options"
+                >
+                  <div
+                    class="select-trigger"
+                    aria-labelledby="lbl-day"
+                    aria-label="Select Day"
+                    tabindex="0"
+                  >
+                    <span>All Days</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options" id="day-options">
+                    <div class="option selected" data-value="all">All Days</div>
+                    <div class="option" data-value="Saturday">Saturday</div>
+                    <div class="option" data-value="Sunday">Sunday</div>
+                    <div class="option" data-value="Monday">Monday</div>
+                    <div class="option" data-value="Tuesday">Tuesday</div>
+                    <div class="option" data-value="Wednesday">Wednesday</div>
+                    <div class="option" data-value="Thursday">Thursday</div>
+                    <div class="option" data-value="Friday">Friday</div>
+                  </div>
+                </div>
+                <select id="day-filter" class="hidden">
+                  <option value="all">All Days</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room Controls Removed -->
+        </section>
+
+        <div id="schedule-view" class="view-content">
+          <div id="subject-list-container" class="subject-highlight-box hidden">
+            <h4><i class="fa-solid fa-layer-group"></i> Available Subjects</h4>
+            <div id="subject-tags" class="subject-tags"></div>
+          </div>
+
+          <div class="table-container">
+            <table id="schedule-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Group</th>
+                  <th>Doctor</th>
+                  <th>Day</th>
+                  <th>Time</th>
+                  <th>Room</th>
+                  <th>Teams Code</th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+                <!-- Data will be injected here -->
+              </tbody>
+            </table>
+
+            <div id="no-results" class="hidden">
+              <div id="meme-container"></div>
+              <i class="fa-solid fa-ghost"></i>
+              <p id="no-results-text">No matching schedules found.</p>
+            </div>
+          </div>
+
+          <nav class="pagination" id="pagination">
+            <button id="prev-page" disabled>
+              <i class="fa-solid fa-chevron-left"></i> Previous
+            </button>
+            <div id="page-numbers"></div>
+            <button id="next-page">
+              Next <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Live Dashboard View -->
+        <section id="live-dashboard-view" class="view-content hidden">
+          <div id="live-empty-state" class="live-empty-state hidden">
+            <i class="fa-solid fa-mug-hot"></i>
+            <h3>No active lectures right now.</h3>
+            <p>Enjoy your break! ☕</p>
+          </div>
+          <!-- Active/Upcoming Cards will be injected here -->
+          <div id="live-feed-container"></div>
+        </section>
+        <!-- Room View Removed -->
+      </main>
+    </div>
+
+    <!-- EMERGENCY: Force SW Unregister for ALL users -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
+        if ("caches" in window) {
+          caches.keys().then((names) => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      }
+    </script>
+
+    <!-- Fuse.js already in head -->
+    <script type="module" src="app.js?v=2"></script>
+
+    <button
+      id="fab-scroll-top"
+      class="fab"
+      title="Scroll to top"
+      aria-label="Scroll to top"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </body>
+</html>

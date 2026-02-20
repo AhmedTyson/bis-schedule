@@ -1,0 +1,294 @@
+/* Main Container */
+.container {
+  padding: var(--padding-container);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  background-image:
+    linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--padding-mobile);
+  }
+}
+
+main {
+  padding-bottom: 20px;
+}
+
+/* Header & Branding */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0; /* Tighter padding */
+  margin-bottom: clamp(16px, 3vw, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* CLS Fix: Reduced height */
+  min-height: 70px;
+  box-sizing: border-box;
+}
+
+/* View Switcher Capsule */
+.view-switcher {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.03); /* Extremely subtle matte base */
+  border-radius: 999px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  min-width: 160px; /* Consistent width */
+}
+
+/* Sliding Glider (The Active 'Border' / Background) */
+.view-switcher::before {
+  content: "";
+  position: absolute;
+  top: 2px; /* Precision fit */
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  /* Premium Glider: Apple-style "raised" material look (but flat/matte) */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Very subtle elevation, no glow */
+  pointer-events: none;
+}
+
+.view-switcher.active-live::before {
+  transform: translateX(100%);
+}
+
+.toggle-btn {
+  position: relative;
+  z-index: 2;
+  background: transparent !important; /* Force override browser defaults */
+  border: none !important;
+  outline: none !important;
+  color: var(--text-dim);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: none !important;
+}
+
+.toggle-btn:hover {
+  color: var(--text-main);
+}
+
+.toggle-btn.active {
+  background: transparent !important;
+  color: var(--accent); /* Premium Purple */
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.toggle-btn i {
+  font-size: 0.85em;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    padding: 12px 0;
+    margin-bottom: 16px;
+  }
+
+  .brand {
+    flex-direction: column;
+    gap: 4px; /* Tighter */
+  }
+
+  .brand-info h1 {
+    font-size: 18px; /* High density mobile */
+    line-height: 1.2;
+  }
+
+  .brand-badge {
+    margin-left: 0;
+    margin-top: 2px;
+    display: inline-block;
+  }
+
+  /* Ensure Ramadan gold remains vibrant on mobile */
+  #ramadan-indicator {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Tighter */
+  min-width: 260px;
+}
+
+.brand-logo {
+  color: var(--accent);
+  font-size: 24px; /* More discrete */
+  filter: none; /* Strip legacy glow */
+}
+
+.brand-info h1 {
+  font-size: 20px; /* High density desktop */
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.03em; /* Tighter for premium look */
+  line-height: 1.2;
+  color: #fff;
+  min-height: 24px;
+}
+
+.brand-info span {
+  font-size: 11px; /* Smaller */
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+#ramadan-indicator {
+  color: #fbbf24; /* Amber Moon */
+  font-family: var(--font-ramadan);
+  font-size: 1.1em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.2); /* Subtle glow */
+}
+
+#academic-indicator {
+  color: #a855f7; /* Purple School */
+}
+
+.brand-badge {
+  font-size: 9px; /* Smaller */
+  background: rgba(168, 85, 247, 0.1); /* Subtle substrate */
+  color: var(--accent);
+  padding: 3px 8px; /* Tighter */
+  border-radius: 999px; /* Pill shape */
+  vertical-align: middle;
+  margin-left: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(168, 85, 247, 0.15); /* Soft matte border */
+  text-transform: uppercase;
+}
+
+/* View Switcher (Segmented Control) */
+.view-switcher {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  /* Premium Well: Inset background for depth without borders */
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  padding: 3px; /* Slightly tighter */
+  gap: 0;
+  width: fit-content;
+  min-width: 200px; /* Better balance between the super-small and large */
+}
+
+/* WIDGET MODE */
+body.widget-mode .container {
+  max-width: 100%;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0;
+  margin: 0;
+}
+
+body.widget-mode header {
+  display: none;
+}
+body.widget-mode main {
+  padding: 0;
+}
+body.widget-mode .controls {
+  margin-bottom: 15px;
+}
+body.widget-mode .brand-badge {
+  display: none;
+}
+
+/* FAB - Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px; /* Accessibility: Touch Target */
+  min-height: 48px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2000;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.8);
+}
+
+.fab.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+}
+
+.fab:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-5px) scale(1.1);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .fab {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}

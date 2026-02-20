@@ -1,0 +1,60 @@
+/* --- CLEAR BUTTON (Styled Text) --- */
+.clear-btn-styled {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    outline: none; /* Remove default focus ring ONLY if replaced */
+}
+
+.clear-btn-styled:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.clear-btn-styled:active {
+    transform: scale(0.96);
+}
+
+.clear-btn-styled:hover {
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Base class for primary actions if needed, or specific overrides */
+
+
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.copy-btn:hover {
+    color: var(--accent);
+    background: var(--accent-bg);
+}
+
+.copy-btn.copied {
+    color: var(--success);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+}

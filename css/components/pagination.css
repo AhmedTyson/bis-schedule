@@ -1,0 +1,57 @@
+/* Pagination */
+.pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        margin-bottom: 120px; /* Space for FAB */
+    }
+}
+
+.pagination button {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    border-color: var(--accent);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--border);
+}
+
+#page-numbers { display: flex; gap: 8px; }
+.page-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.page-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 700;
+}

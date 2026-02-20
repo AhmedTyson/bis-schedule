@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Reset | BIS Schedule</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #111; color: #fff; padding: 2rem; text-align: center; }
+        .btn { background: #E1306C; color: white; border: none; padding: 1rem 2rem; font-size: 1.2rem; border-radius: 8px; cursor: pointer; margin-top: 2rem; }
+        .log { margin-top: 2rem; font-family: monospace; color: #aaa; text-align: left; background: #222; padding: 1rem; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Emergency Service Worker Reset</h1>
+    <p>Use this if the site is stuck on an old version or showing 404 errors.</p>
+    
+    <button class="btn" onclick="nukeIt()">💣 Nuke Service Worker & Cache</button>
+    
+    <div id="log" class="log">Logs will appear here...</div>
+
+    <script>
+        function log(msg) {
+            const logEl = document.getElementById('log');
+            logEl.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+        }
+
+        async function nukeIt() {
+            log('Starting cleanup...');
+            
+            // 1. Unregister Service Workers
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                if (registrations.length === 0) log('No Service Workers found.');
+                
+                for (let registration of registrations) {
+                    await registration.unregister();
+                    log(`Unregistered Service Worker: ${registration.scope}`);
+                }
+            } else {
+                log('Service Workers not supported.');
+            }
+
+            // 2. Delete Caches
+            if ('caches' in window) {
+                const keys = await caches.keys();
+                if (keys.length === 0) log('No Caches found.');
+                
+                for (let key of keys) {
+                    await caches.delete(key);
+                    log(`Deleted Cache: ${key}`);
+                }
+            }
+
+            log('✅ Cleanup Complete!');
+            log('Redirecting to home in 3 seconds to test...');
+            
+            setTimeout(() => {
+                window.location.href = '/?timestamp=' + Date.now();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

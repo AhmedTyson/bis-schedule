@@ -1,0 +1,462 @@
+/* Live Dashboard Styles - Premium Redesign */
+
+#live-dashboard-view {
+  padding-bottom: 80px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+#live-feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.live-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-left: 4px;
+  margin-bottom: 8px; /* Add spacing below title */
+}
+
+/* --- ACCORDION TOGGLES (Minimalist + Functional) --- */
+.time-group-details {
+  background: transparent;
+  margin-bottom: 24px;
+  border-radius: 0;
+  position: relative; /* Context for pseudo-element */
+  padding-left: 0;
+  transition: all 0.2s ease;
+}
+
+/* Active Styling: Soft Glowing Indicator Pill */
+.time-group-details[open] {
+  padding-left: 16px; /* Indent content */
+}
+
+/* The "Comfort Line" - Rounded, soft, glowing */
+.time-group-details::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px; /* Align with text visually */
+  bottom: 14px; /* Don't stretch full height, keep it centered on content block */
+  width: 3px;
+  border-radius: 4px;
+  background: var(--group-color, rgba(255, 255, 255, 0.4));
+  /* Comfort Line: Matte, no heavy glow */
+  box-shadow: none;
+  opacity: 0;
+  transform: scaleY(0.8);
+  transition: all 0.3s ease;
+}
+
+.time-group-details[open]::before {
+  opacity: 1; /* Solid visibility */
+  transform: scaleY(1);
+}
+
+.time-group-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Very subtle divider */
+  margin-bottom: 16px;
+  transition: opacity 0.2s ease;
+}
+
+/* Remove complex borders/backgrounds for open state */
+.time-group-details[open] .time-group-summary {
+  border-bottom-color: var(
+    --group-color,
+    rgba(255, 255, 255, 0.15)
+  ); /* Colored divider */
+  background: transparent;
+}
+
+.time-group-summary::-webkit-details-marker {
+  display: none;
+}
+
+.time-group-summary:hover {
+  opacity: 1;
+}
+
+/* Priority Header for Live Now */
+/* Custom Green Border for Live Section */
+.time-group-details:has(.live-priority) {
+  --group-color: #34d399; /* Override variable for Live */
+}
+
+.time-group-summary.live-priority {
+  border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+}
+.time-group-summary.live-priority .summary-text {
+  color: #34d399;
+}
+
+/* Icon Rotation & Styling */
+.summary-icon {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  opacity: 0.7;
+}
+
+/* Rotate icon when open */
+.time-group-details[open] .summary-icon {
+  transform: rotate(180deg);
+  color: var(--text-muted); /* Don't distract with bright white */
+}
+
+.summary-text {
+  font-size: 1rem; /* Slightly smaller/cleaner */
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.time-group-details[open] .summary-text {
+  color: #fff; /* Only text brightens */
+}
+
+.summary-count {
+  margin-left: auto;
+  margin-right: 12px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+/* Add slide-down animation (simple opacity/margin for now as height is tricky) */
+/* Animation Removed for instant performance */
+
+/* Grid Layout */
+.cards-grid {
+  display: grid;
+  padding: 0; /* Remove indentation */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px; /* Comfortable gap */
+  margin-top: 0;
+}
+
+/* --- CARD CONTAINER (Fluid & Mobile-First) --- */
+.live-card {
+  background: #1c1c1e;
+  border-radius: clamp(10px, 1.5vw, 12px); /* Slightly smaller radius */
+  /* Fluid padding: scales from 12px on small mobile to 20px on desktop */
+  padding: clamp(0.75rem, 2.5vw, 1.25rem);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1.5vw, 0.8rem); /* Tighter breathing room */
+  cursor: default;
+  border: 1px solid transparent;
+  min-width: 0;
+}
+
+/* --- HEADER --- */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* Fluid micro-text: even smaller */
+  font-size: clamp(0.6rem, 1.25vw, 0.7rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-indicator {
+  width: 5px; /* Tiny indicator */
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.live-card.active .status-indicator {
+  background: #34d399; /* Emerald Green */
+  opacity: 1;
+}
+
+.time-readout {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.65rem;
+}
+
+/* --- BODY --- */
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1.2vw, 0.75rem);
+}
+
+/* --- TYPOGRAPHY --- */
+.card-subject {
+  /* Fluid Heading: Adjusted down for high density */
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Meta List */
+.meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 1vw, 6px);
+  margin-top: auto;
+}
+
+.meta-row {
+  display: flex;
+  flex-direction: column; /* Default to column to prevent mobile flicker */
+  gap: 2px;
+  /* Fluid metadata sizing: tighter */
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  padding-top: clamp(4px, 1vw, 8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Softer divider */
+}
+
+@media (min-width: 768px) {
+  .meta-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.meta-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.meta-label {
+  color: #a1a1aa;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.meta-val {
+  color: #f3f4f6;
+  font-weight: 500;
+  text-align: left; /* Alignment change for stacked view */
+}
+
+@media (min-width: 768px) {
+  .meta-val {
+    text-align: right;
+  }
+}
+
+/* --- FOOTER & PROGRESS --- */
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.live-card.active .time-remaining {
+  color: #34d399;
+}
+
+.progress-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 100%;
+  background: #34d399;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s linear;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.status-indicator.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Empty State */
+.live-empty-state {
+  /* Square Layout */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px; /* Limit size */
+
+  text-align: center;
+  padding: 20px; /* Reduced padding as flex handles spacing */
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin: 20px auto; /* Centered with some vertical breathing room */
+  transition: all 0.5s ease;
+
+  /* Optional: Add a subtle background to define the square shape if desired, 
+     but for now keeping it transparent as per original, just shaping the container.
+     If user wants a "card", we might need background. 
+     Given "make it in square", the shape is key. */
+  border-radius: 20px; /* Soften the square */
+}
+
+.live-empty-state.ramadan-active {
+  animation: float 6s ease-in-out infinite;
+  opacity: 1; /* Brighten up for the occasion */
+}
+
+/* Gentle Float Animation for Ramadan */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.live-empty-state i {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* --- INTERACTION (Desktop) --- */
+@media (hover: hover) {
+  .live-card:hover {
+    background: color-mix(in srgb, var(--subject-color) 10%, transparent);
+    border: 1px solid var(--subject-color);
+  }
+}
+
+/* --- INTERACTION (Mobile Touch) --- */
+@media (hover: none) {
+  .live-card:active {
+    background: color-mix(in srgb, var(--subject-color) 15%, transparent);
+    border-color: var(--subject-color);
+  }
+}
+
+/* --- MOBILE SPECIFIC OVERRIDES --- */
+@media (max-width: 768px) {
+  #live-feed-container {
+    gap: 20px;
+  }
+
+  .cards-grid {
+    /* 
+       Optimized Grid: 
+       Allows 2-columns on modern large phones (iPhone Pro Max / S24 Ultra),
+       but falls back to 1-column on compact phones (iPhone SE) to prevent crowding.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .time-group-summary {
+    padding: 12px 4px;
+    margin-bottom: 8px;
+  }
+
+  .summary-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* Adaptive Meta-Rows: Stacking for width breathing room */
+  .meta-list {
+    gap: 8px;
+  }
+
+  .meta-row {
+    flex-direction: column; /* Stack Label and Value */
+    align-items: flex-start;
+    gap: 2px;
+    font-size: 0.75rem;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .meta-val {
+    text-align: left; /* No more fighting for horizontal space */
+    width: 100%;
+    color: #fff; /* Slightly brighter for readability */
+    overflow-wrap: break-word; /* Ensure long names never overflow */
+  }
+
+  .meta-row:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .card-subject {
+    /* Ensure subject doesn't push layout too much */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}
+
+/* Extra Small Phone Refinement (< 380px) */
+@media (max-width: 380px) {
+  .cards-grid {
+    grid-template-columns: 1fr; /* Force single column for maximum clarity */
+  }
+}
