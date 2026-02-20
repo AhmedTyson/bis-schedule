@@ -1,104 +1,201 @@
 # BIS Schedule Search
 
+> A bilingual (Arabic/English) schedule search web app for BIS Level 3 students — lightning-fast, offline-capable, and deployed on Netlify.
+
 ![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![PWA Ready](https://img.shields.io/badge/PWA-Ready-purple?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Maintained-green?style=for-the-badge)
+![PWA](https://img.shields.io/badge/PWA-Ready-purple?style=for-the-badge)
+![Netlify](https://img.shields.io/badge/Deployed-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
 
-[🌍 Live Demo](https://your-username.github.io/bis-schedule-search)
+---
 
-A lightning-fast, offline-capable schedule search tool for BIS students. Built with pure Vanilla JS and modern Web APIs to ensure maximum performance on any device.
+## 📋 Table of Contents
 
-## 🎯 Overview & Features
+- [Overview](#overview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Performance Optimizations](#-performance-optimizations)
+- [Getting Started](#-getting-started)
+- [Deployment](#-deployment)
 
-This application solves the problem of finding specific class schedules in a massive dataset. It replaces cumbersome PDFs with an instant, searchable interface.
+---
 
-- **⚡ Instant Search:** Powered by **[Fuse.js](https://www.fusejs.io/)** for robust fuzzy search logic and offloaded to a background Web Worker, results appear instantly as you type.
-- **🔍 Smart Filters:** Drill down by Subject, Group, Doctor, Day, or Time.
-- **📱 Mobile-First Design:** A responsive UI that looks great on phones, with touch-friendly controls.
-- **📶 Offline Capable:** A fully functional Progressive Web App (PWA) that works without an internet connection.
-- **📋 One-Tap Copy:** Quickly copy course codes to your clipboard.
-- **🌙 Dark Mode Native:** Designed with a sleek, dark aesthetic for reduced eye strain.
+## Overview
 
-![App Screenshot](./assets/screenshot.png)
-_(Note: Add a screenshot of the app here)_
+BIS Schedule Search solves a real problem: navigating a large, static semester schedule PDF. The app replaces the PDF entirely with an instant, searchable, filterable web interface that works in both Arabic and English.
 
-## 🏗️ Architecture & Tech Stack
+Built with **zero build tooling** — no Webpack, no Vite, no Babel. The architecture relies entirely on native browser ES Modules, making development frictionless and bundle size zero. A Web Worker handles all search computation off the main thread, keeping the UI at 60fps even on mobile devices.
+
+---
+
+## ✨ Features
+
+| Feature               | Description                                                                      |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **Bilingual Search**  | Query by doctor name in either Arabic or English — both supported simultaneously |
+| **Fuzzy Search**      | Powered by Fuse.js for typo-tolerant, intelligent matching                       |
+| **Advanced Filters**  | Filter by Subject, Group, Doctor, Day, and Time — independently or combined      |
+| **Live Dashboard**    | Real-time view highlighting current and upcoming active schedule slots           |
+| **Off-Thread Search** | Fuse.js runs inside a Web Worker — UI never blocks during search                 |
+| **Dark Mode Native**  | Sleek dark aesthetic designed for reduced eye strain                             |
+| **One-Tap Copy**      | Copy attendance codes and section info instantly to clipboard                    |
+| **Admin Reset Panel** | `admin-reset.html` for clearing cached state and refreshing data                 |
+| **PWA Support**       | Service Worker registered for offline capability                                 |
+
+---
+
+## 💻 Tech Stack
+
+| Layer              | Technology                                       |
+| ------------------ | ------------------------------------------------ |
+| **Language**       | JavaScript (Vanilla ES6 Modules)                 |
+| **Search Library** | [Fuse.js](https://www.fusejs.io/) (fuzzy search) |
+| **Threading**      | Web Workers API (off-main-thread search)         |
+| **Data**           | Local `schedule-data.json`                       |
+| **Deployment**     | Netlify (`netlify.toml` pre-configured)          |
+| **PWA**            | Service Worker (`sw.js`)                         |
+
+---
+
+## 🏗️ Architecture
 
 **Philosophy: The "No Build Step" Approach**
 
-This project completely eschews complex build tools like Webpack, Vite, or Babel. It relies on standard **ES Modules** natively supported by all modern browsers. This facilitates instant development loops and zero configuration overhead.
-
-### Core Modules
-
-- **`App.js`**: The composition root. Initializes the `DataService`, `UIManager`, and `FilterManager`.
-- **`DataService.js`**: Manages data fetching and caching. It spawns a **Web Worker** (`SearchWorker.js`) to handle CPU-intensive search operations off the main thread.
-- **`FilterManager.js`**: A pure logic class that maintains the state of active filters (Subject, Group, Day) and applies them to the dataset.
-- **`UIManager.js`**: Handles DOM manipulation, rendering the `ScheduleTable` component, and managing event listeners.
-
-## 🚀 Local Development
-
-Since there is no build step, you only need a static file server to run the project locally.
-
-1.  **Clone the repository**
-
-    ```bash
-    git clone https://github.com/your-username/bis-schedule-search.git
-    cd bis-schedule-search
-    ```
-
-2.  **Start a local server**
-    You can use any static server. Here are a few options:
-    - **Using Python (Pre-installed on most systems):**
-
-      ```bash
-      # Python 3
-      python -m http.server 8000
-      ```
-
-    - **Using Node.js:**
-
-      ```bash
-      npx serve .
-      ```
-
-    - **Using VS Code:**
-      Install the "Live Server" extension and click "Go Live".
-
-3.  **Open in Browser**
-    Navigate to `http://localhost:8000` (or whatever port your server provided).
-
-## 📂 Project Structure
-
-```text
-/
-├── css/
-│   ├── base/           # Reset and CSS Variables
-│   ├── components/     # Component-specific styles (buttons, table, inputs)
-│   └── layout/         # Main container and responsive grid
-├── modules/
-│   ├── components/     # UI Components (ScheduleTable.js)
-│   ├── workers/        # Web Workers (SearchWorker.js)
-│   ├── App.js          # Entry Point
-│   ├── DataService.js  # Data & Worker Management
-│   └── ...             # Other utility modules
-├── assets/             # Icons, Memes, Images
-├── index.html          # Main application shell
-├── sw.js               # Service Worker for PWA support
-└── schedule-data.json  # Raw dataset
 ```
+index.html  →  app.js (Entry Point)
+                   ↓
+         ┌─────────────────────┐
+         │      DataService    │──── spawns ──→ SearchWorker.js (Web Worker)
+         │  (fetch + cache)    │                  ↓ Fuse.js search
+         └─────────────────────┘                  ↓ returns results
+                   ↓
+         ┌─────────────────────┐
+         │    FilterManager    │  ← maintains active filter state
+         └─────────────────────┘
+                   ↓
+         ┌─────────────────────┐
+         │     UIManager       │  ← DOM rendering, event listeners
+         └─────────────────────┘
+                   ↓
+         ┌─────────────────────┐
+         │   ScheduleTable.js  │  ← Renders result rows with bilingual cells
+         └─────────────────────┘
+```
+
+### Module Responsibilities
+
+| Module             | Role                                                  |
+| ------------------ | ----------------------------------------------------- |
+| `app.js`           | Composition root — initializes and wires all modules  |
+| `DataService.js`   | Fetches JSON data, spawns Worker, manages caching     |
+| `FilterManager.js` | Pure state machine for active filter combinations     |
+| `UIManager.js`     | All DOM manipulation and event binding                |
+| `ScheduleTable.js` | Bilingual stacked-cell table rendering                |
+| `SearchWorker.js`  | Runs Fuse.js search entirely off the main thread      |
+| `LiveDashboard.js` | Computes and displays currently active schedule slots |
+| `CustomSelect.js`  | Accessible, styled dropdown component                 |
+
+---
+
+## 📁 Project Structure
+
+```
+bis-schedule/
+├── index.html                     # Main application shell
+├── admin-reset.html               # Admin panel for cache/state reset
+├── app.js                         # Composition root
+├── schedule-data.json             # Raw schedule dataset (JSON)
+├── sw.js                          # Service Worker (PWA)
+├── netlify.toml                   # Netlify deployment configuration
+├── preview.png                    # Social sharing preview image
+│
+├── modules/                       # ES6 module layer
+│   ├── App.js
+│   ├── DataService.js
+│   ├── FilterManager.js
+│   ├── UIManager.js
+│   ├── LiveDashboard.js
+│   ├── CustomSelect.js
+│   ├── DOMUtils.js
+│   ├── Icons.js
+│   ├── Utils.js
+│   │
+│   ├── components/
+│   │   └── ScheduleTable.js       # Bilingual table renderer
+│   │
+│   ├── utils/
+│   │   ├── ScheduleProcessor.js
+│   │   └── TimeUtils.js
+│   │
+│   └── workers/
+│       └── SearchWorker.js        # Off-thread Fuse.js search
+│
+├── css/                           # Modular CSS architecture
+│   ├── base/
+│   │   ├── reset.css
+│   │   └── variables.css
+│   └── components/
+│       ├── buttons.css
+│       ├── inputs.css
+│       ├── table.css
+│       ├── search.css
+│       ├── pagination.css
+│       ├── tags.css
+│       ├── live-dashboard.css
+│       └── utilities.css
+│
+├── assets/                        # Media and third-party libraries
+│   ├── libs/fuse.esm.js           # Fuse.js (local, no CDN dependency)
+│   └── meme-friday-[1-5].webp     # Weekly meme assets
+│
+└── scripts/                       # Dev utilities
+    ├── test-schedule.mjs
+    └── verify-project.js
+```
+
+---
 
 ## ⚡ Performance Optimizations
 
-We treat performance as a feature, not an afterthought.
+| Optimization                 | Impact                                                      |
+| ---------------------------- | ----------------------------------------------------------- |
+| **Off-Main-Thread Search**   | Web Worker keeps UI at 60fps during search                  |
+| **Debounced Inputs**         | Prevents redundant search on rapid keystrokes               |
+| **Local Fuse.js**            | No CDN dependency — zero network request for search library |
+| **CSS `content-visibility`** | Off-screen table rows skipped during paint                  |
+| **No Build Overhead**        | Zero bundle time — browser loads only what it needs         |
 
-1.  **Off-Main-Thread Architecture**: Search logic is moved to a Web Worker, ensuring the UI thread remains buttery smooth at 60fps, even while filtering thousands of records.
-2.  **Layout Containment**: CSS `content-visibility: auto` is applied to table rows to skip rendering off-screen content, significantly reducing initial paint time.
-3.  **Debounced Inputs**: Search inputs are debounced to prevent unnecessary calculations during rapid typing.
-4.  **Native Modules**: Zero bundle size overhead. The browser loads exactly what it needs, when it needs it.
+---
 
-## 🔮 Future Roadmap
+## 🚀 Getting Started
 
-- [ ] **Integration Testing**: Add Cypress/Playwright tests for critical user flows.
-- [ ] **PWA Enhancements**: Add a custom install prompt and richer offline fallbacks.
-- [ ] **Conflict Detection**: Visual warnings for overlapping class times.
-- [ ] **Theme Toggle**: Support for light mode (if requested).
+```bash
+# Clone the repository
+git clone https://github.com/AhmedTyson/bis-schedule.git
+
+cd bis-schedule
+
+# Serve locally (ES Modules require HTTP — cannot open as file://)
+python -m http.server 8000
+# OR
+npx serve .
+```
+
+Open `http://localhost:8000` in your browser.
+
+---
+
+## 🌐 Deployment
+
+The project is pre-configured for Netlify:
+
+```toml
+# netlify.toml handles:
+# - Cache-Control headers (aggressive no-cache for JS/JSON)
+# - SPA redirects
+# - Security headers
+```
+
+To deploy: connect this repository to Netlify — no build command needed.
