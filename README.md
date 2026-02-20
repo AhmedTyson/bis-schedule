@@ -1,24 +1,27 @@
-# BIS Schedule Search
+# <img src="https://api.iconify.design/lucide:calendar.svg?color=%238A2BE2" width="32" height="32" align="center" /> BIS Schedule Search
 
-> A bilingual (Arabic/English) schedule search web app for BIS Level 3 students — lightning-fast, offline-capable, and deployed on Netlify.
+> **Bilingual (Arabic/English) schedule search web app for BIS Level 3 students.**
+> Lightning-fast, offline-capable, and precision-engineered for mobile-first academic navigation.
 
-![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![PWA](https://img.shields.io/badge/PWA-Ready-purple?style=for-the-badge)
-![Netlify](https://img.shields.io/badge/Deployed-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
+<div align="center">
+
+| Project Status | Core Technology                                                                                                   | Deployment                                                                                             | Reliability                                                             |
+| :------------- | :---------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- |
+| `ACTIVE`       | ![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white) | ![PWA](https://img.shields.io/badge/PWA-Ready-8A2BE2?style=flat-square) |
+
+</div>
 
 ---
 
-## 📋 Table of Contents
+## <img src="https://api.iconify.design/lucide:list.svg?color=%238A2BE2" width="20" height="20" align="center" /> Table of Contents
 
 - [Overview](#overview)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Architecture](#-architecture)
 - [Project Structure](#-project-structure)
-- [Performance Optimizations](#-performance-optimizations)
+- [Performance](#-performance-optimizations)
 - [Getting Started](#-getting-started)
-- [Deployment](#-deployment)
 
 ---
 
@@ -30,7 +33,9 @@ Built with **zero build tooling** — no Webpack, no Vite, no Babel. The archite
 
 ---
 
-## ✨ Features
+---
+
+## <img src="https://api.iconify.design/lucide:sparkles.svg?color=%238A2BE2" width="20" height="20" align="center" /> Features
 
 | Feature               | Description                                                                      |
 | --------------------- | -------------------------------------------------------------------------------- |
@@ -46,7 +51,9 @@ Built with **zero build tooling** — no Webpack, no Vite, no Babel. The archite
 
 ---
 
-## 💻 Tech Stack
+---
+
+## <img src="https://api.iconify.design/lucide:cpu.svg?color=%238A2BE2" width="20" height="20" align="center" /> Tech Stack
 
 | Layer              | Technology                                       |
 | ------------------ | ------------------------------------------------ |
@@ -59,7 +66,9 @@ Built with **zero build tooling** — no Webpack, no Vite, no Babel. The archite
 
 ---
 
-## 🏗️ Architecture
+---
+
+## <img src="https://api.iconify.design/lucide:git-pull-request.svg?color=%238A2BE2" width="20" height="20" align="center" /> Architecture
 
 **Philosophy: The "No Build Step" Approach**
 
@@ -99,7 +108,9 @@ index.html  →  app.js (Entry Point)
 
 ---
 
-## 📁 Project Structure
+---
+
+## <img src="https://api.iconify.design/lucide:folder-tree.svg?color=%238A2BE2" width="20" height="20" align="center" /> Project Structure
 
 ```
 bis-schedule/
@@ -157,7 +168,9 @@ bis-schedule/
 
 ---
 
-## ⚡ Performance Optimizations
+---
+
+## <img src="https://api.iconify.design/lucide:zap.svg?color=%238A2BE2" width="20" height="20" align="center" /> Performance Optimizations
 
 | Optimization                 | Impact                                                      |
 | ---------------------------- | ----------------------------------------------------------- |
@@ -169,7 +182,9 @@ bis-schedule/
 
 ---
 
-## 🚀 Getting Started
+---
+
+## <img src="https://api.iconify.design/lucide:rocket.svg?color=%238A2BE2" width="20" height="20" align="center" /> Getting Started
 
 ```bash
 # Clone the repository
@@ -187,7 +202,9 @@ Open `http://localhost:8000` in your browser.
 
 ---
 
-## 🌐 Deployment
+---
+
+## <img src="https://api.iconify.design/lucide:globe.svg?color=%238A2BE2" width="20" height="20" align="center" /> Deployment
 
 The project is pre-configured for Netlify:
 
