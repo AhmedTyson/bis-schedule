@@ -16,8 +16,8 @@ export class LiveDashboard {
 
   start() {
     if (this.#intervalId) return;
-    this.#update(); // Immediate run
-    this.#intervalId = setInterval(() => this.#update(), 60000); // 60s loop
+    this.refresh(); // Immediate run
+    this.#intervalId = setInterval(() => this.refresh(), 60000); // 60s loop
   }
 
   stop() {
@@ -27,7 +27,7 @@ export class LiveDashboard {
     }
   }
 
-  #update(force = false) {
+  refresh(force = false) {
     const allData = this.#dataService.getAllData();
     const { active, upcoming } = this.#dataService.getActiveClasses();
     const allItems = [...active, ...upcoming];

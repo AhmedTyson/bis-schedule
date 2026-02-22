@@ -171,11 +171,16 @@ header {
 }
 
 .brand-info span {
-  font-size: 11px; /* Smaller */
+  font-size: 11px;
   color: var(--accent);
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.1em;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
 }
 
 #ramadan-indicator {

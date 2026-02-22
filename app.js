@@ -65,7 +65,7 @@ class App {
 
       // Update Live Dashboard immediately if it's active
       if (window.location.hash === "#live") {
-        this.liveDashboard?.start();
+        this.liveDashboard?.refresh(true);
       }
 
       this.#initFilters(data);
