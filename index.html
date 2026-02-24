@@ -57,17 +57,11 @@
     <!-- Preloading disabled to resolve console credential/unused warnings -->
     <!-- Sub-modules are imported by app.js, allowing browser to discover them naturally to avoid 'unused' warnings -->
 
-    <!-- CSS Preloads (All components to prevent blocking) -->
-    <!-- CSS Sheets -->
     <!-- CSS Sheets -->
     <link rel="stylesheet" href="css/base/variables.css" />
-    <!-- Fonts -->
+    <!-- Fonts (single non-blocking load for all families) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
 
     <link rel="stylesheet" href="css/base/reset.css?v=2" />
     <link rel="stylesheet" href="css/layout/layout.css?v=2" />
@@ -79,17 +73,15 @@
     <link rel="stylesheet" href="css/components/utilities.css?v=2" />
     <link rel="stylesheet" href="css/components/buttons.css?v=2" />
     <link rel="stylesheet" href="css/components/live-dashboard.css?v=2" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media = 'all'"
     />
     <noscript
       ><link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
         rel="stylesheet"
     /></noscript>
     <link
@@ -103,7 +95,7 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     /></noscript>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0" defer></script>
+    <!-- Fuse.js loaded inside SearchWorker.js from local assets/libs/fuse.esm.js -->
   </head>
   <body>
     <div id="loader">
@@ -292,15 +284,18 @@
 
           <div class="table-container">
             <table id="schedule-table">
+              <caption class="sr-only">
+                BIS Level 3 Class Schedule
+              </caption>
               <thead>
                 <tr>
-                  <th>Subject</th>
-                  <th>Group</th>
-                  <th>Doctor</th>
-                  <th>Day</th>
-                  <th>Time</th>
-                  <th>Room</th>
-                  <th>Teams Code</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Group</th>
+                  <th scope="col">Doctor</th>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Room</th>
+                  <th scope="col">Teams Code</th>
                 </tr>
               </thead>
               <tbody id="table-body">

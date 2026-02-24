@@ -18,13 +18,27 @@ export class LiveDashboard {
     if (this.#intervalId) return;
     this.refresh(); // Immediate run
     this.#intervalId = setInterval(() => this.refresh(), 60000); // 60s loop
+
+    // Pause timer when tab is hidden to save battery
+    document.addEventListener("visibilitychange", this.#handleVisibility);
   }
+
+  #handleVisibility = () => {
+    if (document.hidden) {
+      clearInterval(this.#intervalId);
+      this.#intervalId = null;
+    } else {
+      this.refresh(); // Immediate catch-up
+      this.#intervalId = setInterval(() => this.refresh(), 60000);
+    }
+  };
 
   stop() {
     if (this.#intervalId) {
       clearInterval(this.#intervalId);
       this.#intervalId = null;
     }
+    document.removeEventListener("visibilitychange", this.#handleVisibility);
   }
 
   refresh(force = false) {

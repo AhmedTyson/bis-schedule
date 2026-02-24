@@ -96,17 +96,38 @@ class App {
       Utils.debounce((e) => {
         this.#filters.update("search", e.target.value);
         this.handleFilterChange();
-      }, 300),
+      }, 150),
     );
 
     // Clear Button
     this.#ui.elements.clearFilters.onclick = () => {
       this.#ui.elements.searchInput.value = "";
-      this.#ui.elements.searchInput.dispatchEvent(new Event("input")); // Trigger debounce
       this.#filters.reset();
       Object.values(this.#dropdowns).forEach((d) => d.reset());
       this.handleFilterChange();
     };
+
+    // Keyboard Shortcuts
+    window.addEventListener("keydown", (e) => {
+      // Focus search on Ctrl+K / Cmd+K
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        this.#ui.elements.searchInput.focus();
+        this.#ui.elements.searchInput.select();
+      }
+      // Clear filters on Escape
+      if (e.key === "Escape") {
+        this.#ui.elements.clearFilters.click();
+      }
+      // Switch to Live view on Alt+L
+      if (e.altKey && e.key === "l") {
+        e.preventDefault();
+        const currentView =
+          window.location.hash === "#live" ? "schedule" : "live";
+        this.#ui.switchView(currentView);
+        this.#handleViewChange(currentView);
+      }
+    });
   }
 
   #initFilters(data) {

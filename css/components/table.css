@@ -60,7 +60,8 @@
   border-radius: var(--radius-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  min-height: 80vh; /* Prevent CLS - Increased for stability */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px; /* Realistic estimate, replaces brute-force 80vh */
 }
 
 @media (max-width: 768px) {
@@ -164,27 +165,27 @@ table {
 
 th {
   background: var(--bg-hover);
-  padding: 24px 16px;
-  font-size: 14px;
+  padding: 14px 16px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   text-align: center;
   border-bottom: 2px solid var(--border);
 }
 
 td {
-  padding: 24px 16px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text-main);
   text-align: center;
+  font-size: 14px;
   transition: color 0.2s ease;
 }
 
 tbody tr {
-  /* Performance: Skip rendering off-screen rows */
-  content-visibility: auto;
-  contain-intrinsic-size: 0 60px; /* Estimate row height */
+  transition: background-color 0.15s ease;
 }
 
 tbody tr:hover {

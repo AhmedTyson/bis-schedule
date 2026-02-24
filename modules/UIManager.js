@@ -96,7 +96,7 @@ export class UIManager {
     setTimeout(() => {
       iconContainer.innerHTML = originalIcon;
       btn.classList.remove("copied");
-    }, 2000);
+    }, 1000);
   }
 
   get elements() {
@@ -235,6 +235,7 @@ export class UIManager {
 
     if (el.prevBtn) {
       el.prevBtn.disabled = currentPage === 1;
+      el.prevBtn.setAttribute("aria-label", `Go to page ${currentPage - 1}`);
       // Direct binding - Simple and robust
       el.prevBtn.onclick = () => {
         if (currentPage > 1) onPageChange(currentPage - 1);
@@ -244,6 +245,7 @@ export class UIManager {
     if (el.nextBtn) {
       // Ensure strict comparison and type safety
       el.nextBtn.disabled = currentPage >= maxPage;
+      el.nextBtn.setAttribute("aria-label", `Go to page ${currentPage + 1}`);
       // Direct binding - Simple and robust
       el.nextBtn.onclick = () => {
         if (currentPage < maxPage) onPageChange(currentPage + 1);
@@ -255,6 +257,10 @@ export class UIManager {
       const btn = document.createElement("button");
       btn.textContent = i;
       btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
+      btn.setAttribute("aria-label", `Go to page ${i}`);
+      if (i === currentPage) {
+        btn.setAttribute("aria-current", "page");
+      }
       // Direct binding for numbers
       btn.onclick = () => {
         if (i !== currentPage) onPageChange(i);

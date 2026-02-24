@@ -85,7 +85,7 @@ header {
   z-index: 2;
   background: transparent !important; /* Force override browser defaults */
   border: none !important;
-  outline: none !important;
+  outline: none; /* Remove default, replaced by :focus-visible below */
   color: var(--text-dim);
   padding: 6px 14px;
   border-radius: 999px;
@@ -97,7 +97,11 @@ header {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: none !important;
+}
+
+.toggle-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .toggle-btn:hover {

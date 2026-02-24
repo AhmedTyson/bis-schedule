@@ -13,6 +13,11 @@ export class DataService {
       type: "module",
     });
     this.#worker.onmessage = this.#handleWorkerMessage.bind(this);
+    this.#worker.onerror = (e) => {
+      console.error("SearchWorker crashed:", e);
+      this.#pendingRequests.forEach(({ reject }) => reject(e));
+      this.#pendingRequests.clear();
+    };
   }
 
   /**
@@ -29,11 +34,9 @@ export class DataService {
    */
   async fetchData() {
     try {
-      // Aggressive Cache Busting: Append unique timestamp to URL
-      const bustCache = `?t=${new Date().getTime()}`;
-      const response = await fetch(Config.DATA_URL + bustCache, {
+      // Deploy-version cache bust (bump on each deploy, not per-request)
+      const response = await fetch(Config.DATA_URL + "?v=2", {
         credentials: "same-origin",
-        cache: "no-store",
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
@@ -134,10 +137,24 @@ export class DataService {
 
   // --- Worker Communication ---
 
-  #sendToWorker(type, payload) {
+  #sendToWorker(type, payload, timeoutMs = 5000) {
     return new Promise((resolve, reject) => {
       const id = this.#requestIdCounter++;
-      this.#pendingRequests.set(id, { resolve, reject });
+      const timer = setTimeout(() => {
+        this.#pendingRequests.delete(id);
+        reject(new Error(`Worker timeout on ${type}`));
+      }, timeoutMs);
+
+      this.#pendingRequests.set(id, {
+        resolve: (v) => {
+          clearTimeout(timer);
+          resolve(v);
+        },
+        reject: (e) => {
+          clearTimeout(timer);
+          reject(e);
+        },
+      });
       this.#worker.postMessage({ type, payload, id });
     });
   }
