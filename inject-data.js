@@ -1,57 +1,40 @@
 const fs = require("fs");
-const https = require("https");
 
-// Check if Netlify provided the real data via environment variable
-const dataUrl = process.env.REAL_DATA_URL;
+async function injectData() {
+  const dataUrl = process.env.REAL_DATA_URL;
 
-function fetchUrl(url) {
-  https
-    .get(url, (res) => {
-      // Handle redirects (GitHub gist raw URLs redirect to githubusercontent)
-      if (res.statusCode === 301 || res.statusCode === 302) {
-        console.log(`Following redirect to: ${res.headers.location}`);
-        return fetchUrl(res.headers.location);
-      }
+  if (!dataUrl) {
+    console.log("No REAL_DATA_URL provided. Proceeding with demo data.");
+    return;
+  }
 
-      if (res.statusCode !== 200) {
-        console.error(
-          `❌ Failed to fetch data. Status code: ${res.statusCode}`,
-        );
-        process.exit(1);
-      }
-
-      let rawData = "";
-      res.on("data", (chunk) => {
-        rawData += chunk;
-      });
-      res.on("end", () => {
-        try {
-          // Ensure it's valid JSON before saving
-          const parsed = JSON.parse(rawData);
-          fs.writeFileSync(
-            "schedule-data.json",
-            JSON.stringify(parsed, null, 2),
-          );
-          console.log("✅ Real data injected successfully from Gist.");
-        } catch (e) {
-          console.error(
-            "❌ Failed to parse data from Gist. Received: " +
-              rawData.substring(0, 100) +
-              "...",
-          );
-          process.exit(1); // Fail the build if data is corrupted
-        }
-      });
-    })
-    .on("error", (e) => {
-      console.error("❌ Failed to fetch data from Gist:", e.message);
-      process.exit(1);
-    });
-}
-
-if (dataUrl) {
   console.log("Fetching real schedule data from Gist...");
-  fetchUrl(dataUrl);
-} else {
-  console.log("No REAL_DATA_URL provided. Proceeding with demo data.");
+  try {
+    const res = await fetch(dataUrl);
+    const text = await res.text();
+
+    if (!res.ok) {
+      console.error(
+        `❌ Failed to fetch REAL_DATA_URL: HTTP ${res.status} ${res.statusText}`,
+      );
+      process.exit(1);
+    }
+
+    // GitHub often returns HTML (like a 404 page) if the URL is wrong/private
+    if (text.trim().startsWith("<")) {
+      console.error(
+        `❌ Expected JSON but received HTML. Check if REAL_DATA_URL points to the 'Raw' gist and is publicly accessible.`,
+      );
+      process.exit(1);
+    }
+
+    const parsed = JSON.parse(text);
+    fs.writeFileSync("schedule-data.json", JSON.stringify(parsed, null, 2));
+    console.log("✅ Real data injected successfully from Gist.");
+  } catch (e) {
+    console.error("❌ Error injecting data:", e.message);
+    process.exit(1);
+  }
 }
+
+injectData();
