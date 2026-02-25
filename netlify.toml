@@ -2,7 +2,7 @@
   command = "node inject-data.js"
   publish = "."
 
-# Global Security Headers & Default Cache Policy
+# Global Security Headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -13,49 +13,18 @@
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Embedder-Policy = "require-corp"
     Cross-Origin-Resource-Policy = "same-origin"
-    # Default: Always check with server
-    Cache-Control = "public, max-age=0, must-revalidate"
 
-# CRITICAL: Never cache the entry point
 [[headers]]
-  for = "/index.html"
+  for = "/*.css"
   [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Pragma = "no-cache"
-    Expires = "0"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
-# Data: Cache for 1 hour, serve stale while revalidating in background
-# Netlify automatically invalidates on deploy
 [[headers]]
-  for = "/schedule-data.json"
+  for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
-
-# Logic
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-# Application Logic - Force Revalidation
-[[headers]]
-  for = "/app.js"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[headers]]
-  for = "/modules/*"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-# Styles - Force Revalidation (No file hashing in use)
-[[headers]]
-  for = "/css/*"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-# Images - Short cache is acceptable, but safer to revalidate
-[[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
