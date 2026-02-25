@@ -36,8 +36,11 @@ export class DataService {
     try {
       let fetchUrl = Config.DATA_URL + "?v=2";
 
+      // WPO Phase 2: Consume Pre-Fetched Data Promise
+      // If index.html already fired the request, consume it instantly
+      let dataResponse;
+
       // --- Local Dev Sandbox Data ---
-      // If we are on localhost, check if the real hidden dataset exists
       if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
@@ -51,15 +54,20 @@ export class DataService {
             console.log("🔧 Local Dev: Using real dataset.");
           }
         } catch (e) {
-          /* Fallback gracefully to demo data */
+          /* Fallback gracefully */
         }
       }
 
-      // Deploy-version cache bust (bump on each deploy, not per-request)
-      const response = await fetch(fetchUrl);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      // If we are on production and the global promise exists, use it
+      if (window.__DATA_PROMISE__ && fetchUrl.includes(Config.DATA_URL)) {
+        dataResponse = await window.__DATA_PROMISE__;
+      } else {
+        const response = await fetch(fetchUrl);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        dataResponse = await response.json();
+      }
 
-      this.#data = await response.json();
+      this.#data = dataResponse;
 
       // Apply Ramadan Mode mapping if enabled
       if (Config.RAMADAN_MODE?.ENABLED) {

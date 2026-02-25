@@ -60,8 +60,11 @@
   border-radius: var(--radius-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+
+  /* WPO Phase 2: Ultimate CLS Elimination */
   content-visibility: auto;
-  contain-intrinsic-size: 0 600px; /* Realistic estimate, replaces brute-force 80vh */
+  contain: paint layout;
+  min-height: 800px;
 }
 
 @media (max-width: 768px) {
@@ -95,6 +98,9 @@
     box-shadow: var(--shadow);
     animation: rowEntrance 0.5s ease both;
     position: relative;
+
+    /* WPO Phase 2 CLS Fix: Ensure the browser reserves at least the card's base height instantly */
+    min-height: 250px;
   }
 
   td {
