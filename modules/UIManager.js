@@ -25,8 +25,6 @@ export class UIManager {
       "prev-page",
       "next-page",
       "loader",
-      "subject-list-container",
-      "subject-tags",
       "clear-filters",
       "meme-container",
       "no-results-text",
@@ -193,6 +191,9 @@ export class UIManager {
 
   #renderSuggestions(suggestions, onSelect) {
     if (!this.#elements.memeContainer) return;
+    // Clear previous suggestions to prevent duplication on repeated filter changes
+    this.#elements.memeContainer.innerHTML = "";
+
     const container = document.createElement("div");
     container.className = "did-you-mean-container";
     container.innerHTML = "Did you mean: ";
@@ -211,20 +212,17 @@ export class UIManager {
   }
 
   /**
-   * Renders pagination controls.
+   * Renders pagination controls with smart page truncation.
    * @param {number} totalItems - Total number of items in the filtered set.
    * @param {number} currentPage - Current page number.
    * @param {Function} onPageChange - Callback for page changes.
    */
   renderPagination(totalItems, currentPage, onPageChange) {
-    // Store callback and state
     this.#paginationCallback = onPageChange;
-    this.#currentPage = currentPage; // Sync internal state
+    this.#currentPage = currentPage;
 
     const el = this.#elements;
-    if (el.pagination) {
-      el.pagination.dataset.currentPage = currentPage;
-    }
+    if (el.pagination) el.pagination.dataset.currentPage = currentPage;
 
     const maxPage = Math.ceil(totalItems / Config.ROWS_PER_PAGE);
 
@@ -233,41 +231,76 @@ export class UIManager {
 
     if (maxPage <= 1) return;
 
+    // Previous button
     if (el.prevBtn) {
       el.prevBtn.disabled = currentPage === 1;
-      el.prevBtn.setAttribute("aria-label", `Go to page ${currentPage - 1}`);
-      // Direct binding - Simple and robust
       el.prevBtn.onclick = () => {
         if (currentPage > 1) onPageChange(currentPage - 1);
       };
     }
 
+    // Next button
     if (el.nextBtn) {
-      // Ensure strict comparison and type safety
       el.nextBtn.disabled = currentPage >= maxPage;
-      el.nextBtn.setAttribute("aria-label", `Go to page ${currentPage + 1}`);
-      // Direct binding - Simple and robust
       el.nextBtn.onclick = () => {
         if (currentPage < maxPage) onPageChange(currentPage + 1);
       };
     }
 
+    // Build page number list with smart truncation
+    const pages = this.#getVisiblePages(currentPage, maxPage);
     const fragment = document.createDocumentFragment();
-    for (let i = 1; i <= maxPage; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = i;
-      btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
-      btn.setAttribute("aria-label", `Go to page ${i}`);
-      if (i === currentPage) {
-        btn.setAttribute("aria-current", "page");
+
+    pages.forEach((page) => {
+      if (page === "...") {
+        const ellipsis = document.createElement("span");
+        ellipsis.className = "page-ellipsis";
+        ellipsis.textContent = "…";
+        ellipsis.setAttribute("aria-hidden", "true");
+        fragment.appendChild(ellipsis);
+      } else {
+        const btn = document.createElement("button");
+        btn.textContent = page;
+        btn.className = `page-btn${page === currentPage ? " active" : ""}`;
+        btn.setAttribute("aria-label", `Page ${page}`);
+        if (page === currentPage) btn.setAttribute("aria-current", "page");
+        btn.onclick = () => {
+          if (page !== currentPage) onPageChange(page);
+        };
+        fragment.appendChild(btn);
       }
-      // Direct binding for numbers
-      btn.onclick = () => {
-        if (i !== currentPage) onPageChange(i);
-      };
-      fragment.appendChild(btn);
-    }
+    });
+
     el.paginationNumbers?.appendChild(fragment);
+  }
+
+  /**
+   * Returns an array of page numbers and '...' ellipsis markers.
+   * Shows: first, last, current, and 1 neighbor on each side.
+   * All pages shown when total ≤ 7.
+   */
+  #getVisiblePages(current, total) {
+    if (total <= 7) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    const pages = new Set([1, total]);
+    // Current page and its neighbors
+    for (let i = current - 1; i <= current + 1; i++) {
+      if (i >= 1 && i <= total) pages.add(i);
+    }
+
+    const sorted = [...pages].sort((a, b) => a - b);
+    const result = [];
+
+    sorted.forEach((page, idx) => {
+      if (idx > 0 && page - sorted[idx - 1] > 1) {
+        result.push("...");
+      }
+      result.push(page);
+    });
+
+    return result;
   }
 
   /**

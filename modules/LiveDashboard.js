@@ -100,10 +100,10 @@ export class LiveDashboard {
     // 1. Live Now Section (Priority, but closed by default as requested)
     if (active.length > 0) {
       html += `
-        <details class="time-group-details">
+        <details class="time-group-details" open>
              <summary class="time-group-summary live-priority">
                 <span class="summary-text"><i class="fa-solid fa-circle-play fa-fade" style="color: #34d399; font-size: 0.8em; margin-right: 6px;"></i> Live Now</span>
-                <span class="summary-count">${active.length} Active</span>
+                <span class="summary-count">${active.length} ${active.length === 1 ? "Active" : "Active"}</span>
                 <i class="fa-solid fa-chevron-down summary-icon"></i>
              </summary>
           <div class="cards-grid">
@@ -137,7 +137,7 @@ export class LiveDashboard {
            <details class="time-group-details" style="--group-color: ${groupColor}">
              <summary class="time-group-summary">
                 <span class="summary-text">${label}</span>
-                <span class="summary-count">${groupItems.length} Layouts</span>
+                <span class="summary-count">${groupItems.length} ${groupItems.length === 1 ? "Layout" : "Layouts"}</span>
                 <i class="fa-solid fa-chevron-down summary-icon"></i>
              </summary>
              <div class="cards-grid">

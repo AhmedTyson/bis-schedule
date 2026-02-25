@@ -45,17 +45,18 @@ class App {
       }
     }
 
-    // Handle Initial Hash
+    // Handle Initial Hash for view switching
     if (window.location.hash === "#live") {
       this.#ui.switchView("live");
       this.#handleViewChange("live");
     }
 
-    // Handle Back/Forward Navigation
-    window.addEventListener("hashchange", () => {
+    // Handle Back/Forward Navigation (both view hash and filter state)
+    window.addEventListener("popstate", () => {
       const view = window.location.hash === "#live" ? "live" : "schedule";
       this.#ui.switchView(view);
       this.#handleViewChange(view);
+      this.#restoreFiltersFromURL();
     });
 
     try {
@@ -69,7 +70,7 @@ class App {
       }
 
       this.#initFilters(data);
-      this.handleFilterChange();
+      this.#restoreFiltersFromURL();
 
       // Self-Healing: Check if dropdowns are empty after a short delay and retry
       setTimeout(() => {
@@ -96,6 +97,7 @@ class App {
       Utils.debounce((e) => {
         this.#filters.update("search", e.target.value);
         this.handleFilterChange();
+        this.#syncURLFromFilters();
       }, 150),
     );
 
@@ -105,6 +107,7 @@ class App {
       this.#filters.reset();
       Object.values(this.#dropdowns).forEach((d) => d.reset());
       this.handleFilterChange();
+      this.#syncURLFromFilters();
     };
 
     // Keyboard Shortcuts
@@ -152,6 +155,7 @@ class App {
         }
 
         this.handleFilterChange();
+        this.#syncURLFromFilters();
       });
     });
 
@@ -168,8 +172,6 @@ class App {
       return;
     }
 
-    this.#ui.elements.subjectListContainer?.classList.remove("hidden");
-
     // 1. Populate Dropdown Options
     const options = document.getElementById("subject-options");
     if (options) {
@@ -185,27 +187,9 @@ class App {
     // 2. Populate Native Select (Hidden)
     const hiddenSelect = document.getElementById("subject-filter");
     if (hiddenSelect) {
-      // Native selects need option elements, not divs
       hiddenSelect.innerHTML = '<option value="all">All Subjects</option>';
       subjects.forEach((subject) =>
         hiddenSelect.add(new Option(subject, subject)),
-      );
-    }
-
-    // 3. Populate Tags
-    if (this.#ui.elements.subjectTags) {
-      DOMUtils.populateContainer(
-        this.#ui.elements.subjectTags,
-        subjects,
-        (subject) =>
-          DOMUtils.createElement("span", {
-            className: "subject-tag",
-            text: subject,
-            events: {
-              click: () =>
-                this.#dropdowns["subject-dropdown"].select(subject, subject),
-            },
-          }),
       );
     }
   }
@@ -239,19 +223,71 @@ class App {
     }
   }
 
-  // ...
+  /**
+   * Reads URL search params and restores filter + search state.
+   * Called on initial load and on popstate (back/forward).
+   */
+  #restoreFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    const subject = params.get("subject") || "all";
+    const group = params.get("group") || "all";
+    const day = params.get("day") || "all";
+    const search = params.get("q") || "";
+
+    // Update FilterManager state
+    this.#filters.update("subject", subject);
+    this.#filters.update("group", group);
+    this.#filters.update("day", day);
+    this.#filters.update("search", search);
+
+    // Sync UI: search input
+    this.#ui.elements.searchInput.value = search;
+
+    // Sync UI: dropdowns
+    if (subject !== "all" && this.#dropdowns["subject-dropdown"]) {
+      this.#dropdowns["subject-dropdown"].select(subject, subject);
+    }
+    if (group !== "all" && this.#dropdowns["group-dropdown"]) {
+      this.#dropdowns["group-dropdown"].select(group, group);
+    }
+    if (day !== "all" && this.#dropdowns["day-dropdown"]) {
+      this.#dropdowns["day-dropdown"].select(day, day);
+    }
+
+    this.handleFilterChange();
+  }
+
+  /**
+   * Writes current filter state to URL search params.
+   * Uses replaceState to avoid polluting history on every keystroke.
+   */
+  #syncURLFromFilters() {
+    const filters = this.#filters.filters;
+    const params = new URLSearchParams();
+
+    if (filters.subject !== "all") params.set("subject", filters.subject);
+    if (filters.group !== "all") params.set("group", filters.group);
+    if (filters.day !== "all") params.set("day", filters.day);
+    if (filters.search) params.set("q", filters.search);
+
+    const qs = params.toString();
+    const newUrl = qs
+      ? `${window.location.pathname}?${qs}${window.location.hash}`
+      : `${window.location.pathname}${window.location.hash}`;
+
+    history.replaceState(null, "", newUrl);
+  }
 
   async handleFilterChange() {
     const currentScroll = window.scrollY;
 
-    // Schedule View Logic (Only view remaining in this app)
+    // Schedule View Logic
     const searchQuery = this.#filters.filters.search;
 
     // 1. Get Search Results (Async Worker)
     let searchResults;
     if (searchQuery && searchQuery.length >= 2) {
-      // Create a loading state for table if needed, strictly speaking we are debounced
-      // but for slow devices a spinner might be nice.
       searchResults = await this.#dataService.search(searchQuery);
     } else {
       searchResults = this.#dataService.getAllData();
@@ -261,18 +297,8 @@ class App {
     this.#state.filteredData = this.#filters.applyFilters(searchResults);
 
     this.#state.currentPage = 1;
-    this.#updateTagHighlights();
     this.render();
     this.#ui.scrollToResults(currentScroll);
-  }
-
-  #updateTagHighlights() {
-    const currentSubject = this.#filters.filters.subject;
-    this.#ui.elements.subjectTags
-      .querySelectorAll(".subject-tag")
-      .forEach((tag) => {
-        tag.classList.toggle("active", tag.textContent === currentSubject);
-      });
   }
 
   render() {

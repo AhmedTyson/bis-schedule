@@ -429,12 +429,8 @@
   }
 
   .cards-grid {
-    /* 
-       Optimized Grid: 
-       Allows 2-columns on modern large phones (iPhone Pro Max / S24 Ultra),
-       but falls back to 1-column on compact phones (iPhone SE) to prevent crowding.
-    */
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    /* Single column on phones for readable cards */
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -484,6 +480,6 @@
 /* Extra Small Phone Refinement (< 380px) */
 @media (max-width: 380px) {
   .cards-grid {
-    grid-template-columns: 1fr; /* Force single column for maximum clarity */
+    gap: 10px;
   }
 }

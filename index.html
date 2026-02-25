@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Schedule Search | BIS</title>
 
-    <!-- Strict Cache Control -->
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <!-- Cache policy is handled server-side via netlify.toml -->
 
     <!-- Social Sharing Meta Tags (Open Graph) -->
     <meta property="og:title" content="BIS Schedule Search | Level 3" />
@@ -56,6 +50,8 @@
 
     <!-- Preloading disabled to resolve console credential/unused warnings -->
     <!-- Sub-modules are imported by app.js, allowing browser to discover them naturally to avoid 'unused' warnings -->
+    <!-- Preload schedule data to begin download during HTML parsing -->
+    <link rel="preload" href="schedule-data.json" as="fetch" crossorigin />
 
     <!-- CSS Sheets -->
     <link rel="stylesheet" href="css/base/variables.css" />
@@ -63,16 +59,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link rel="stylesheet" href="css/base/reset.css?v=2" />
-    <link rel="stylesheet" href="css/layout/layout.css?v=2" />
-    <link rel="stylesheet" href="css/components/search.css?v=2" />
-    <link rel="stylesheet" href="css/components/table.css?v=2" />
-    <link rel="stylesheet" href="css/components/inputs.css?v=2" />
-    <link rel="stylesheet" href="css/components/tags.css?v=2" />
-    <link rel="stylesheet" href="css/components/pagination.css?v=2" />
-    <link rel="stylesheet" href="css/components/utilities.css?v=2" />
-    <link rel="stylesheet" href="css/components/buttons.css?v=2" />
-    <link rel="stylesheet" href="css/components/live-dashboard.css?v=2" />
+    <!-- Critical CSS: render-blocking (defines initial paint) -->
+    <link rel="stylesheet" href="css/base/reset.css?v=3" />
+    <link rel="stylesheet" href="css/layout/layout.css?v=3" />
+    <link rel="stylesheet" href="css/components/utilities.css?v=3" />
+
+    <!-- Non-critical CSS: deferred (loaded async, applied after paint) -->
+    <link
+      rel="stylesheet"
+      href="css/components/search.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/table.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/inputs.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/tags.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/pagination.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/buttons.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="css/components/live-dashboard.css?v=3"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <!-- Noscript fallback for deferred CSS -->
+    <noscript>
+      <link rel="stylesheet" href="css/components/search.css?v=3" />
+      <link rel="stylesheet" href="css/components/table.css?v=3" />
+      <link rel="stylesheet" href="css/components/inputs.css?v=3" />
+      <link rel="stylesheet" href="css/components/tags.css?v=3" />
+      <link rel="stylesheet" href="css/components/pagination.css?v=3" />
+      <link rel="stylesheet" href="css/components/buttons.css?v=3" />
+      <link rel="stylesheet" href="css/components/live-dashboard.css?v=3" />
+    </noscript>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
@@ -182,23 +226,32 @@
                 <div
                   class="custom-select"
                   id="subject-dropdown"
-                  role="combobox"
                   aria-labelledby="lbl-subject"
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-controls="subject-options"
                 >
                   <div
                     class="select-trigger"
+                    role="combobox"
                     aria-labelledby="lbl-subject"
                     aria-label="Select Subject"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-controls="subject-options"
                     tabindex="0"
                   >
                     <span>All Subjects</span>
                     <i class="fa-solid fa-chevron-down"></i>
                   </div>
-                  <div class="select-options" id="subject-options">
-                    <div class="option selected" data-value="all">
+                  <div
+                    class="select-options"
+                    id="subject-options"
+                    role="listbox"
+                  >
+                    <div
+                      class="option selected"
+                      data-value="all"
+                      role="option"
+                      aria-selected="true"
+                    >
                       All Subjects
                     </div>
                   </div>
@@ -215,23 +268,28 @@
                 <div
                   class="custom-select"
                   id="group-dropdown"
-                  role="combobox"
                   aria-labelledby="lbl-group"
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-controls="group-options"
                 >
                   <div
                     class="select-trigger"
+                    role="combobox"
                     aria-labelledby="lbl-group"
                     aria-label="Select Group"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-controls="group-options"
                     tabindex="0"
                   >
                     <span>All Groups</span>
                     <i class="fa-solid fa-chevron-down"></i>
                   </div>
-                  <div class="select-options" id="group-options">
-                    <div class="option selected" data-value="all">
+                  <div class="select-options" id="group-options" role="listbox">
+                    <div
+                      class="option selected"
+                      data-value="all"
+                      role="option"
+                      aria-selected="true"
+                    >
                       All Groups
                     </div>
                   </div>
@@ -248,30 +306,86 @@
                 <div
                   class="custom-select"
                   id="day-dropdown"
-                  role="combobox"
                   aria-labelledby="lbl-day"
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-controls="day-options"
                 >
                   <div
                     class="select-trigger"
+                    role="combobox"
                     aria-labelledby="lbl-day"
                     aria-label="Select Day"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-controls="day-options"
                     tabindex="0"
                   >
                     <span>All Days</span>
                     <i class="fa-solid fa-chevron-down"></i>
                   </div>
-                  <div class="select-options" id="day-options">
-                    <div class="option selected" data-value="all">All Days</div>
-                    <div class="option" data-value="Saturday">Saturday</div>
-                    <div class="option" data-value="Sunday">Sunday</div>
-                    <div class="option" data-value="Monday">Monday</div>
-                    <div class="option" data-value="Tuesday">Tuesday</div>
-                    <div class="option" data-value="Wednesday">Wednesday</div>
-                    <div class="option" data-value="Thursday">Thursday</div>
-                    <div class="option" data-value="Friday">Friday</div>
+                  <div class="select-options" id="day-options" role="listbox">
+                    <div
+                      class="option selected"
+                      data-value="all"
+                      role="option"
+                      aria-selected="true"
+                    >
+                      All Days
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Saturday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Saturday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Sunday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Sunday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Monday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Monday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Tuesday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Tuesday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Wednesday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Wednesday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Thursday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Thursday
+                    </div>
+                    <div
+                      class="option"
+                      data-value="Friday"
+                      role="option"
+                      aria-selected="false"
+                    >
+                      Friday
+                    </div>
                   </div>
                 </div>
                 <select id="day-filter" class="hidden">
@@ -292,11 +406,6 @@
         </section>
 
         <div id="schedule-view" class="view-content">
-          <div id="subject-list-container" class="subject-highlight-box hidden">
-            <h4><i class="fa-solid fa-layer-group"></i> Available Subjects</h4>
-            <div id="subject-tags" class="subject-tags"></div>
-          </div>
-
           <div class="table-container">
             <table id="schedule-table">
               <caption class="sr-only">
@@ -325,13 +434,18 @@
             </div>
           </div>
 
-          <nav class="pagination" id="pagination">
-            <button id="prev-page" disabled>
-              <i class="fa-solid fa-chevron-left"></i> Previous
+          <nav class="pagination" id="pagination" aria-label="Page navigation">
+            <button
+              id="prev-page"
+              class="page-nav"
+              disabled
+              aria-label="Previous page"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
             </button>
             <div id="page-numbers"></div>
-            <button id="next-page">
-              Next <i class="fa-solid fa-chevron-right"></i>
+            <button id="next-page" class="page-nav" aria-label="Next page">
+              <i class="fa-solid fa-chevron-right"></i>
             </button>
           </nav>
         </div>

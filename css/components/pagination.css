@@ -1,57 +1,144 @@
-/* Pagination */
+/* ===== Pagination — Unified Capsule Design ===== */
+
 .pagination {
-    margin-top: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    position: relative;
-    z-index: 10;
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0; /* No gap — all elements fuse into one capsule */
+  position: relative;
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
-    .pagination {
-        margin-bottom: 120px; /* Space for FAB */
-    }
+  .pagination {
+    margin-bottom: 100px; /* Space for FAB */
+  }
 }
 
+/* Shared base for ALL pagination buttons */
 .pagination button {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .pagination button:hover:not(:disabled) {
-    border-color: var(--accent);
+  background: var(--bg-hover);
+  color: var(--text-main);
+  z-index: 1;
+}
+
+.pagination button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 2;
 }
 
 .pagination button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    border-color: var(--border);
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
-#page-numbers { display: flex; gap: 8px; }
+/* Previous / Next arrows */
+.page-nav {
+  width: 44px;
+  min-width: 44px;
+  font-size: 14px;
+}
+
+#prev-page {
+  border-radius: 10px 0 0 10px;
+  border-right: none;
+}
+
+#next-page {
+  border-radius: 0 10px 10px 0;
+  border-left: none;
+}
+
+/* Page number row */
+#page-numbers {
+  display: flex;
+  gap: 0;
+}
+
+/* Individual page buttons */
 .page-btn {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 0;
+  /* Collapse double borders by overlapping */
+  margin-left: -1px;
 }
 
+.page-btn:first-child {
+  margin-left: 0;
+}
+
+/* Active page */
 .page-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    font-weight: 700;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  z-index: 1;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+/* Ellipsis separator */
+.page-ellipsis {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 14px;
+  letter-spacing: 2px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  margin-left: -1px;
+  user-select: none;
+}
+
+/* Mobile refinements */
+@media (max-width: 480px) {
+  .pagination button {
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .page-nav {
+    width: 38px;
+    min-width: 38px;
+  }
+
+  .page-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .page-ellipsis {
+    width: 28px;
+    height: 36px;
+    font-size: 12px;
+  }
 }

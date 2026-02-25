@@ -27,17 +27,17 @@ export class CustomSelect {
   }
 
   #initAccessibility() {
-    this.#container.setAttribute("role", "combobox");
-    this.#container.setAttribute("aria-expanded", "false");
-    this.#container.setAttribute("aria-haspopup", "listbox");
+    // WAI-ARIA Combobox pattern: role="combobox" goes on the focusable trigger element
+    this.#trigger.setAttribute("role", "combobox");
+    this.#trigger.setAttribute("aria-expanded", "false");
+    this.#trigger.setAttribute("aria-haspopup", "listbox");
 
     // Critical: Preserve existing ID if present to ensure app.js can find it for population.
-    // Only generate a new ID if one isn't already set.
     if (!this.#optionsContainer.id) {
       this.#optionsContainer.id = `${this.#id}-list`;
     }
 
-    this.#container.setAttribute("aria-controls", this.#optionsContainer.id);
+    this.#trigger.setAttribute("aria-controls", this.#optionsContainer.id);
     this.#optionsContainer.setAttribute("role", "listbox");
 
     this.#trigger.setAttribute("tabindex", "0");
@@ -56,6 +56,13 @@ export class CustomSelect {
     this.#container.querySelectorAll(".option").forEach((opt, idx) => {
       opt.setAttribute("role", "option");
       if (!opt.id) opt.id = `${this.#id}-opt-${idx}`;
+      // Set initial aria-selected if not already present
+      if (!opt.hasAttribute("aria-selected")) {
+        opt.setAttribute(
+          "aria-selected",
+          opt.classList.contains("selected").toString(),
+        );
+      }
     });
   }
 
@@ -105,7 +112,7 @@ export class CustomSelect {
     if (shouldOpen) {
       CustomSelect.closeAll(this.#container);
       this.#container.classList.add("active");
-      this.#container.setAttribute("aria-expanded", "true");
+      this.#trigger.setAttribute("aria-expanded", "true");
       // Recalculate options in case they changed
       const opts = Array.from(this.#container.querySelectorAll(".option"));
       this.#activeIndex = opts.findIndex((o) =>
@@ -114,7 +121,8 @@ export class CustomSelect {
       this.#updateHighlight();
     } else {
       this.#container.classList.remove("active");
-      this.#container.setAttribute("aria-expanded", "false");
+      this.#trigger.setAttribute("aria-expanded", "false");
+      this.#trigger.removeAttribute("aria-activedescendant");
       this.#activeIndex = -1;
       this.#updateHighlight();
     }
@@ -131,7 +139,8 @@ export class CustomSelect {
     const activeOpt = options[this.#activeIndex];
     if (activeOpt) {
       activeOpt.scrollIntoView({ block: "nearest" });
-      this.#container.setAttribute("aria-activedescendant", activeOpt.id);
+      // aria-activedescendant goes on the trigger (the focused combobox element)
+      this.#trigger.setAttribute("aria-activedescendant", activeOpt.id);
     }
   }
 
@@ -208,7 +217,12 @@ export class CustomSelect {
     document.querySelectorAll(".custom-select").forEach((d) => {
       if (d !== exceptContainer) {
         d.classList.remove("active");
-        d.setAttribute("aria-expanded", "false");
+        // aria-expanded is on the trigger, not the container
+        const trigger = d.querySelector(".select-trigger");
+        if (trigger) {
+          trigger.setAttribute("aria-expanded", "false");
+          trigger.removeAttribute("aria-activedescendant");
+        }
       }
     });
   }

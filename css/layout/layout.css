@@ -360,7 +360,9 @@ body.widget-mode .brand-badge {
   .fab {
     bottom: 20px;
     right: 20px;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
   }
 }
