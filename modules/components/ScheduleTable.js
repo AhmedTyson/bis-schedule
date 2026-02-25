@@ -1,32 +1,48 @@
-import { Utils } from '../Utils.js';
-import { Icons } from '../Icons.js';
+import { Utils } from "../Utils.js";
+import { Icons } from "../Icons.js";
 
 export class ScheduleTable {
-    #container;
-    #tbody;
-    
-    constructor() {
-        this.#tbody = document.getElementById('table-body');
-    }
+  #container;
+  #tbody;
 
-    render(data, searchTerm) {
-        if (!this.#tbody) return;
-        this.#tbody.innerHTML = '';
-        
-        const fragment = document.createDocumentFragment();
-        data.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = this.#getRowTemplate(item, searchTerm);
-            fragment.appendChild(tr);
-        });
-        this.#tbody.appendChild(fragment);
-    }
+  constructor() {
+    this.#tbody = document.getElementById("table-body");
+  }
 
-    #getRowTemplate(item, searchTerm) {
-        const subjectDisplay = Utils.getSubjectDisplay(item.subject);
-        const highlight = (text) => Utils.highlightText(text, searchTerm);
+  render(data, searchTerm) {
+    if (!this.#tbody) return;
+    this.#tbody.innerHTML = "";
 
-        return `
+    if (!data || data.length === 0) return;
+
+    let index = 0;
+    const CHUNK_SIZE = 15; // Optimize TBT by yielding the main thread
+
+    const renderChunk = () => {
+      const fragment = document.createDocumentFragment();
+      const end = Math.min(index + CHUNK_SIZE, data.length);
+
+      for (; index < end; index++) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = this.#getRowTemplate(data[index], searchTerm);
+        fragment.appendChild(tr);
+      }
+
+      this.#tbody.appendChild(fragment);
+
+      if (index < data.length) {
+        requestAnimationFrame(renderChunk);
+      }
+    };
+
+    requestAnimationFrame(renderChunk);
+  }
+
+  #getRowTemplate(item, searchTerm) {
+    const subjectDisplay = Utils.getSubjectDisplay(item.subject);
+    const highlight = (text) => Utils.highlightText(text, searchTerm);
+
+    return `
             <td class="subject-cell" data-label="Subject">${highlight(subjectDisplay)}</td>
             <td class="group-cell" data-label="Group">${highlight(item.group)}</td>
             <td class="doctor-cell" data-label="Doctor">
@@ -47,5 +63,5 @@ export class ScheduleTable {
                 </div>
             </td>
         `;
-    }
+  }
 }
