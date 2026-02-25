@@ -35,9 +35,7 @@ export class DataService {
   async fetchData() {
     try {
       // Deploy-version cache bust (bump on each deploy, not per-request)
-      const response = await fetch(Config.DATA_URL + "?v=2", {
-        credentials: "same-origin",
-      });
+      const response = await fetch(Config.DATA_URL + "?v=2");
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       this.#data = await response.json();
