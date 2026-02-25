@@ -1,5 +1,6 @@
 import { Utils } from "./Utils.js";
 import { Config } from "./Config.js";
+import { Icons } from "./Icons.js";
 
 export class LiveDashboard {
   #dataService;
@@ -200,6 +201,17 @@ export class LiveDashboard {
             <div class="meta-row">
               <span class="meta-label">Group</span>
               <span class="meta-val">${item.group}</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Code</span>
+              <div class="meta-val">
+                <div class="code-wrapper live-code-wrapper">
+                    <span class="code-cell">${item.code}</span>
+                    <button class="copy-btn" title="Copy Code" aria-label="Copy Code" data-code="${item.code}">
+                        <span class="icon-wrapper">${Icons.copy}</span>
+                    </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

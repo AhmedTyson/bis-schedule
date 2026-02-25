@@ -121,97 +121,160 @@ header {
 @media (max-width: 768px) {
   header {
     flex-direction: column;
-    gap: 12px;
+    gap: 12px; /* Tighter distribution */
     align-items: center;
     text-align: center;
-    padding: 12px 0;
-    margin-bottom: 16px;
+    padding: 12px 0 8px 0;
   }
 
   .brand {
     flex-direction: column;
-    gap: 4px; /* Tighter */
+    text-align: center;
+    gap: 6px;
+  }
+
+  .brand-logo {
+    width: 32px; /* Thinner for mobile density */
+    height: 32px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .brand-title-row {
+    display: flex;
+    flex-direction: row; /* Try to keep on one line or wrap tightly */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
   }
 
   .brand-info h1 {
-    font-size: 18px; /* High density mobile */
-    line-height: 1.2;
+    font-size: 18px;
   }
 
   .brand-badge {
     margin-left: 0;
-    margin-top: 2px;
-    display: inline-block;
+    font-size: 8px;
+    padding: 2px 6px;
   }
 
-  /* Ensure Ramadan gold remains vibrant on mobile */
-  #ramadan-indicator {
-    color: #fbbf24 !important;
-    text-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+  .brand-subtitle {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .subtitle-tag {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
   }
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px; /* Tighter */
+  gap: 16px; /* Slightly more room for the new app icon box */
   min-width: 260px;
 }
 
+/* Premium App Icon Style */
 .brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 12px;
   color: var(--accent);
-  font-size: 24px; /* More discrete */
-  filter: none; /* Strip legacy glow */
+  font-size: 20px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05); /* Slight glass reflection */
+}
+
+/* Structural Title Row */
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
 }
 
 .brand-info h1 {
-  font-size: 20px; /* High density desktop */
+  font-size: 21px;
   font-weight: 700;
   margin: 0;
-  letter-spacing: -0.03em; /* Tighter for premium look */
+  letter-spacing: -0.02em;
   line-height: 1.2;
-  color: #fff;
-  min-height: 24px;
+  color: #ffffff;
 }
 
-.brand-info span {
-  font-size: 11px;
-  color: var(--accent);
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  display: inline-flex;
+/* Premium Pill Subtitles */
+.brand-subtitle {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 8px; /* Breathing room between tags */
+}
+
+.subtitle-tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06); /* Premium frosted glass base */
+  color: rgba(255, 255, 255, 0.9); /* High contrast, crisp white-gray */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
   gap: 4px;
-  max-width: 100%;
 }
 
-#ramadan-indicator {
-  color: #fbbf24; /* Amber Moon */
+/* Special Tags (Ramadan / Academic) inherit their brand colors but fit the tag shape */
+#ramadan-indicator.special-tag {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.2);
   font-family: var(--font-ramadan);
-  font-size: 1.1em;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 10px rgba(251, 191, 36, 0.2); /* Subtle glow */
 }
 
-#academic-indicator {
-  color: #a855f7; /* Purple School */
+#academic-indicator.special-tag {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--accent);
+  border-color: rgba(168, 85, 247, 0.2);
 }
 
 .brand-badge {
-  font-size: 9px; /* Smaller */
-  background: rgba(168, 85, 247, 0.1); /* Subtle substrate */
+  font-size: 10px;
+  background: var(--accent-bg);
   color: var(--accent);
-  padding: 3px 8px; /* Tighter */
-  border-radius: 999px; /* Pill shape */
-  vertical-align: middle;
-  margin-left: 10px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  border: 1px solid rgba(168, 85, 247, 0.15); /* Soft matte border */
+  padding: 3px 8px;
+  border-radius: 6px; /* Match subtitle-tag radius for consistency */
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+a.brand-badge:hover,
+a.brand-badge:focus-visible {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--accent);
+  outline: none;
+}
+
+a.brand-badge i {
+  font-size: 1.1em;
 }
 
 /* View Switcher (Segmented Control) */

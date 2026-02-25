@@ -45,8 +45,8 @@ export class UIManager {
   }
 
   #initGlobalListeners() {
-    // Event Delegation for Copy Buttons
-    this.#elements.tableBody?.addEventListener("click", async (e) => {
+    // Event Delegation for Copy Buttons (Global)
+    document.addEventListener("click", async (e) => {
       const btn = e.target.closest(".copy-btn");
       if (!btn) return;
 

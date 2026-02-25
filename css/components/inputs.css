@@ -1,187 +1,189 @@
 .filters-grid {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    overflow: visible !important;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: visible !important;
 }
 
 @media (max-width: 768px) {
-    .filters-grid {
-        flex-direction: column;
-        gap: 16px;
-        align-items: center; /* Center groups */
-    }
-    
-    .filter-group {
-        width: 100%;
-        max-width: 320px; /* Cap width for better centering look */
-        align-items: center; /* Center label and select */
-    }
+  .filters-grid {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center; /* Center groups */
+  }
 
-    .filter-group .input-label {
-        padding-left: 0;
-        justify-content: center;
-        width: 100%;
-    }
+  .filter-group {
+    width: 100%;
+    max-width: 300px; /* Tighter width */
+    gap: 4px; /* Tighter internal gap */
+  }
 
-    .select-trigger {
-        height: 44px;
-        font-size: 14px;
-        text-align: center;
-        justify-content: center;
-        gap: 10px;
-    }
+  .filter-group .input-label {
+    font-size: 10px;
+    justify-content: center;
+    width: 100%;
+    height: 14px;
+    margin-bottom: 0;
+  }
 
-    .select-trigger span:first-child {
-        flex: 0 1 auto; /* Don't force left align */
-    }
+  .select-trigger {
+    height: 38px;
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .select-trigger span:first-child {
+    flex: 0 1 auto; /* Don't force left align */
+  }
 }
 
 .filter-group {
-    flex: 0 0 auto;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  flex: 0 0 auto;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .filter-group .input-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-left: 2px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 18px; /* Strict height to prevent CLS */
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 18px; /* Strict height to prevent CLS */
 }
 
 .filter-group .input-label i {
-    width: 12px;
-    min-width: 12px;
-    text-align: center;
-    font-size: 10px;
+  width: 12px;
+  min-width: 12px;
+  text-align: center;
+  font-size: 10px;
 }
 
 /* Custom Select Styling */
 .custom-select {
-    position: relative;
-    z-index: 10; /* Lower base level */
-    overflow: visible !important;
-    width: 100%;
-    user-select: none;
+  position: relative;
+  z-index: 10; /* Lower base level */
+  overflow: visible !important;
+  width: 100%;
+  user-select: none;
 }
 
 .custom-select.active {
-    z-index: 1000; /* High priority when active */
+  z-index: 1000; /* High priority when active */
 }
 
 .select-trigger {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 0 14px;
-    color: var(--text-main);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 38px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0 14px;
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38px;
 }
 
 .select-trigger span:first-child {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .select-trigger:hover,
 .select-trigger:focus-visible {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--border-highlight);
-    outline: none;
-    box-shadow: 0 0 0 2px var(--accent-bg);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-highlight);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
 .custom-select.active .select-trigger {
-    border-color: var(--accent);
-    background: var(--bg-panel); /* Solid background when active */
+  border-color: var(--accent);
+  background: var(--bg-panel); /* Solid background when active */
 }
 
 .select-options {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    width: auto;
-    min-width: 100%;
-    max-width: none; /* Allow full expansion if needed */
-    background: #050505; /* Solid opaque background matching --bg-void */
-    border: 1px solid var(--border-highlight);
-    border-radius: var(--radius-md);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-    z-index: 2000; /* Absolute top priority */
-    max-height: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all var(--transition-fast);
-    padding: 4px 0; 
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: auto;
+  min-width: 100%;
+  max-width: none; /* Allow full expansion if needed */
+  background: #050505; /* Solid opaque background matching --bg-void */
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  z-index: 2000; /* Absolute top priority */
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-fast);
+  padding: 4px 0;
 }
 
 /* Scrollbar for Dropdowns */
 .select-options::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .select-options::-webkit-scrollbar-track {
-    background: #000000;
-    border-radius: 10px;
-    margin: 8px 2px;
+  background: #000000;
+  border-radius: 10px;
+  margin: 8px 2px;
 }
 
 .select-options::-webkit-scrollbar-thumb {
-    background: #404040;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-    transition: background 0.3s ease;
+  background: #404040;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background 0.3s ease;
 }
 
 .select-options::-webkit-scrollbar-thumb:hover {
-    background-color: #555555;
-    border: 1px solid transparent;
+  background-color: #555555;
+  border: 1px solid transparent;
 }
 
 .custom-select.active .select-options {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .option {
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-muted);
-    transition: all 0.2s;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: all 0.2s;
 }
 
 .option:hover,
 .option.highlighted {
-    background: var(--bg-hover);
-    color: var(--text-main);
+  background: var(--bg-hover);
+  color: var(--text-main);
 }
 
 .option.selected {
-    color: var(--accent);
-    background: var(--accent-bg);
-    font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  font-weight: 600;
 }

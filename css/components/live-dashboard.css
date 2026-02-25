@@ -276,6 +276,33 @@
   }
 }
 
+/* Specific styling for the injected code wrapper inside live cards */
+.live-code-wrapper {
+  justify-content: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.85em; /* Slightly scale down inside the tight card space */
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .live-code-wrapper {
+    justify-content: flex-end; /* Align right on desktop to match other values */
+  }
+}
+
+/* Ensure the copy button inside the dark card is legible */
+.live-code-wrapper .copy-btn {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-color: transparent;
+  width: 28px;
+  height: 28px;
+}
+
+.live-code-wrapper .copy-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
 /* --- FOOTER & PROGRESS --- */
 .card-footer {
   margin-top: auto;
