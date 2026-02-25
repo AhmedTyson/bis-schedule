@@ -34,8 +34,29 @@ export class DataService {
    */
   async fetchData() {
     try {
+      let fetchUrl = Config.DATA_URL + "?v=2";
+
+      // --- Local Dev Sandbox Data ---
+      // If we are on localhost, check if the real hidden dataset exists
+      if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+      ) {
+        try {
+          const checkRes = await fetch("schedule-data.real.json?v=2", {
+            method: "HEAD",
+          });
+          if (checkRes.ok) {
+            fetchUrl = "schedule-data.real.json?v=2";
+            console.log("🔧 Local Dev: Using real dataset.");
+          }
+        } catch (e) {
+          /* Fallback gracefully to demo data */
+        }
+      }
+
       // Deploy-version cache bust (bump on each deploy, not per-request)
-      const response = await fetch(Config.DATA_URL + "?v=2");
+      const response = await fetch(fetchUrl);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       this.#data = await response.json();

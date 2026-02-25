@@ -1,4 +1,5 @@
 [build]
+  command = "node inject-data.js"
   publish = "."
 
 # Global Security Headers & Default Cache Policy
