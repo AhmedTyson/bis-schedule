@@ -1,5 +1,4 @@
 import { Config } from "./modules/Config.js";
-
 import { Utils } from "./modules/Utils.js";
 import { TimeUtils } from "./modules/utils/TimeUtils.js";
 import { CustomSelect } from "./modules/CustomSelect.js";
