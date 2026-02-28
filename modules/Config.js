@@ -1,6 +1,6 @@
 export const Config = {
-  DATA_URL: "schedule-data.real.json",
-  SECTIONS_DATA_URL: "sections-data.real.json",
+  DATA_URL: "schedule-data.json",
+  SECTIONS_DATA_URL: "sections-data.json",
   DESKTOP_WIDTH: 1200,
   FRIDAY_MEME_COUNT: 5,
   SUBJECT_ACRONYMS: {

@@ -39,43 +39,37 @@ export class DataService {
       // If index.html already fired the request, consume it instantly
       let dataResponse;
 
-      // Environment-specific URL resolution
+      // --- Local Dev Sandbox Data ---
       if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
       ) {
-        console.log("🔧 Local Dev: Using local datasets.");
-        // URL is already local in Config, but we ensure it matches the pattern
-        fetchUrl = fetchUrl.replace(/^https:\/\/.*?\/raw\//, "");
+        const fallbacks = {
+          [Config.DATA_URL]: "schedule-data.real.json",
+          [Config.SECTIONS_DATA_URL]: "sections-data.real.json",
+        };
+
+        const fallback = fallbacks[Config.DATA_URL];
+        if (fallback) {
+          try {
+            const checkRes = await fetch(`${fallback}?v=2`, { method: "HEAD" });
+            if (checkRes.ok) {
+              fetchUrl = `${fallback}?v=2`;
+              console.log(`🔧 Local Dev: Using real dataset (${fallback}).`);
+            }
+          } catch {
+            /* Fallback gracefully */
+          }
+        }
       }
 
       // If we are on production and the global promise exists, use it
       if (window.__DATA_PROMISE__ && fetchUrl.includes(Config.DATA_URL)) {
-        try {
-          dataResponse = await window.__DATA_PROMISE__;
-          if (!dataResponse)
-            throw new Error("Pre-fetch failed or returned null");
-        } catch (e) {
-          console.warn(
-            "Pre-fetch failed, falling back to fresh fetch:",
-            e.message,
-          );
-          const response = await fetch(fetchUrl);
-          if (!response.ok)
-            throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
-          dataResponse = await response.json();
-        }
+        dataResponse = await window.__DATA_PROMISE__;
       } else {
         const response = await fetch(fetchUrl);
-        if (!response.ok)
-          throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         dataResponse = await response.json();
-      }
-
-      if (!Array.isArray(dataResponse)) {
-        throw new Error(
-          "Invalid data format: Expected an array of schedule items.",
-        );
       }
 
       this.#data = dataResponse;
@@ -172,18 +166,29 @@ export class DataService {
    */
   async switchDataSource(url) {
     try {
-      let fetchUrl = url + "?v=2";
+      let fetchUrl = url;
 
+      // Local Dev Fallback for Sections
       if (
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1"
+        (window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1") &&
+        url === Config.SECTIONS_DATA_URL
       ) {
-        fetchUrl = url.replace(/^https:\/\/.*?\/raw\//, "") + "?v=2";
+        try {
+          const checkRes = await fetch("sections-data.real.json?v=2", {
+            method: "HEAD",
+          });
+          if (checkRes.ok) {
+            fetchUrl = "sections-data.real.json";
+            console.log("🔧 Local Dev: Switch using real sections dataset.");
+          }
+        } catch {
+          /* ignore */
+        }
       }
 
-      const response = await fetch(fetchUrl);
-      if (!response.ok)
-        throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
+      const response = await fetch(fetchUrl + "?v=2");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       this.#data = await response.json();
 
       // Apply Ramadan Mode mapping if enabled
@@ -220,7 +225,7 @@ export class DataService {
 
   // --- Worker Communication ---
 
-  #sendToWorker(type, payload, timeoutMs = 10000) {
+  #sendToWorker(type, payload, timeoutMs = 5000) {
     return new Promise((resolve, reject) => {
       const id = this.#requestIdCounter++;
       const timer = setTimeout(() => {

@@ -49,24 +49,14 @@
     <!-- SEO Boost -->
 
     <!-- Preload schedule data to begin download immediately -->
-    <link
-      rel="preload"
-      href="schedule-data.real.json?v=2"
-      as="fetch"
-      crossorigin
-    />
+    <link rel="preload" href="schedule-data.json?v=2" as="fetch" crossorigin />
     <script>
       // WPO Phase 2: Instant Data Fetch
+      // Fire this request *before* the browser even begins parsing the 8-module JS chain.
       // This eliminates ~1.2s of critical path latency.
-      window.__DATA_PROMISE__ = fetch("schedule-data.real.json?v=2")
-        .then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}`);
-          return r.json();
-        })
-        .catch((err) => {
-          console.warn("Pre-fetch failed:", err.message);
-          return null;
-        });
+      window.__DATA_PROMISE__ = fetch("schedule-data.json?v=2").then((r) =>
+        r.json(),
+      );
     </script>
 
     <!-- Fonts (High Priority Preconnect & Preload) -->

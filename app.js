@@ -354,26 +354,19 @@ class App {
         try {
           this.#ui.setLoading(true);
 
-          // Capture current filters before switch
-          const currentFilters = { ...this.#filters.filters };
-
           const data = await this.#dataService.switchDataSource(url);
           this.#state.filteredData = data;
 
-          // Re-init filters with new data but try to preserve values
+          // Reset filters and repopulate dropdowns
+          this.#filters.reset();
+          this.#ui.elements.searchInput.value = "";
           this.#initFilters(data);
-
-          // Restore filters if they still make sense for the new data
-          // (initFilters already handles most of this by populating dropdowns)
-          // We just need to trigger a fresh application of filters
           this.handleFilterChange();
 
           // Refresh Live Dashboard if it's active
           this.liveDashboard?.refresh(true);
         } catch (error) {
           console.error("Failed to switch data source:", error);
-          this.#ui.elements.noResults.innerHTML = `<div class="error-message">Failed to switch data source: ${error.message}</div>`;
-          this.#ui.elements.noResults.classList.remove("hidden");
         } finally {
           this.#ui.setLoading(false);
         }

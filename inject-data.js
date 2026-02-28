@@ -1,40 +1,53 @@
 const fs = require("fs");
 
-async function injectData() {
-  const dataUrl = process.env.REAL_DATA_URL;
-
-  if (!dataUrl) {
-    console.log("No REAL_DATA_URL provided. Proceeding with demo data.");
-    return;
+async function fetchData(url, filename) {
+  if (!url) {
+    console.log(`No URL provided for ${filename}. Proceeding with demo data.`);
+    return false;
   }
 
-  console.log("Fetching real schedule data from Gist...");
+  console.log(`Fetching real data for ${filename} from Gist...`);
   try {
-    const res = await fetch(dataUrl);
+    const res = await fetch(url);
     const text = await res.text();
 
     if (!res.ok) {
       console.error(
-        `❌ Failed to fetch REAL_DATA_URL: HTTP ${res.status} ${res.statusText}`,
+        `❌ Failed to fetch ${url}: HTTP ${res.status} ${res.statusText}`,
       );
-      process.exit(1);
+      return false;
     }
 
-    // GitHub often returns HTML (like a 404 page) if the URL is wrong/private
     if (text.trim().startsWith("<")) {
       console.error(
-        `❌ Expected JSON but received HTML. Check if REAL_DATA_URL points to the 'Raw' gist and is publicly accessible.`,
+        `❌ Expected JSON but received HTML for ${filename}. Check Gist accessibility.`,
       );
-      process.exit(1);
+      return false;
     }
 
     const parsed = JSON.parse(text);
-    fs.writeFileSync("schedule-data.json", JSON.stringify(parsed, null, 2));
-    console.log("✅ Real data injected successfully from Gist.");
+    fs.writeFileSync(filename, JSON.stringify(parsed, null, 2));
+    console.log(`✅ ${filename} injected successfully from Gist.`);
+    return true;
   } catch (e) {
-    console.error("❌ Error injecting data:", e.message);
-    process.exit(1);
+    console.error(`❌ Error injecting ${filename}:`, e.message);
+    return false;
   }
 }
 
-injectData();
+async function injectAll() {
+  const lectureSuccess = await fetchData(
+    process.env.REAL_DATA_URL,
+    "schedule-data.json",
+  );
+  const sectionSuccess = await fetchData(
+    process.env.REAL_SECTIONS_URL,
+    "sections-data.json",
+  );
+
+  if (!lectureSuccess && !sectionSuccess) {
+    console.log("⚠️ No real data injected. Using repository demo files.");
+  }
+}
+
+injectAll();

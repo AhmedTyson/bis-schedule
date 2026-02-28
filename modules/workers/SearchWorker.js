@@ -9,15 +9,16 @@ self.onmessage = async (e) => {
 
   try {
     if (type === "INIT") {
-      const start = performance.now();
       const { data } = payload;
 
-      // 0. Pre-compute searchable text
+      // 0. Pre-compute searchable text (Moved from DataService)
+      // We modify the data in-place (or rather, the worker's copy)
       data.forEach((item) => {
-        const subjectDisplay = Utils.getSubjectDisplay(item.subject);
-        item._searchIndex = Utils.normalizeText(
-          `${item.subject} ${subjectDisplay} ${item.group} ${item.doctorAr} ${item.doctorEn} ${item.day} ${item.time} ${item.originalTime || ""} ${item.code} ${item.room}`,
-        );
+        item._searchIndex = Utils.normalizeText(`
+                    ${item.subject} ${Utils.getSubjectDisplay(item.subject)} 
+                    ${item.group} ${item.doctorAr} ${item.doctorEn} 
+                    ${item.day} ${item.time} ${item.originalTime || ""} ${item.code} ${item.room}
+                `);
       });
 
       // 1. Initialize Main Fuse
@@ -39,9 +40,11 @@ self.onmessage = async (e) => {
         minMatchCharLength: 3,
         findAllMatches: true,
         getFn: (obj, key) => {
-          if (key === "subjectAcronym")
-            return Utils.normalizeText(Utils.getSubjectDisplay(obj.subject));
-          return Utils.normalizeText(obj[key]);
+          const val =
+            key === "subjectAcronym"
+              ? Utils.getSubjectDisplay(obj.subject)
+              : obj[key];
+          return Utils.normalizeText(val);
         },
       });
 
@@ -72,13 +75,23 @@ self.onmessage = async (e) => {
         minMatchCharLength: 2,
       });
 
-      const end = performance.now();
-      console.log(`🚀 SearchWorker: INIT took ${(end - start).toFixed(2)}ms`);
+      // Send back the data (with _searchIndex added) if needed,
+      // but usually DataService just needs to know we are ready.
+      // Actually, DataService uses _searchIndex for its own simple filtering too?
+      // FilterManager uses DataService.fuse usually?
+      // Wait, FilterManager logic:
+      // "const results = fuse.search(criteria.search)..."
+      // "return data.filter(item => ...)"
+      // FilterManager does filtering on the MAIN thread using `data`.
+      // If we move Fuse to worker, FilterManager needs to change to async?
+      // Or `FilterManager` delegates search to `DataService` which delegates to Worker?
 
       self.postMessage({ type: "READY", id });
     } else if (type === "SEARCH") {
       if (!fuse) return;
       const results = fuse.search(payload.query);
+      // Return only items or indices? Returning items is easier for now.
+      // Transfer overhead for large data might be an issue, but let's start simple.
       const items = results.map((r) => r.item);
       self.postMessage({ type: "SEARCH_RESULTS", payload: items, id });
     } else if (type === "SUGGEST") {

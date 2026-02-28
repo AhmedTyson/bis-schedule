@@ -1,3 +1,6 @@
+// service-worker.js (Kill Switch)
+const ASSETS = [];
+
 self.addEventListener("install", (_e) => {
   self.skipWaiting();
 });
