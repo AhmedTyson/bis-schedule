@@ -1,5 +1,4 @@
 import { Config } from "./Config.js";
-import { TimeUtils } from "./utils/TimeUtils.js";
 import { ScheduleProcessor } from "./utils/ScheduleProcessor.js";
 
 export class DataService {
@@ -53,7 +52,7 @@ export class DataService {
             fetchUrl = "schedule-data.real.json?v=2";
             console.log("🔧 Local Dev: Using real dataset.");
           }
-        } catch (e) {
+        } catch {
           /* Fallback gracefully */
         }
       }

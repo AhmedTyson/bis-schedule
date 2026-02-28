@@ -355,24 +355,7 @@ class App {
         try {
           this.#ui.setLoading(true);
 
-          // Use real data file in local dev
-          let fetchUrl = url;
-          if (
-            (window.location.hostname === "localhost" ||
-              window.location.hostname === "127.0.0.1") &&
-            source === "lectures"
-          ) {
-            try {
-              const checkRes = await fetch("schedule-data.real.json?v=2", {
-                method: "HEAD",
-              });
-              if (checkRes.ok) fetchUrl = "schedule-data.real.json";
-            } catch (e) {
-              /* fallback */
-            }
-          }
-
-          const data = await this.#dataService.switchDataSource(fetchUrl);
+          const data = await this.#dataService.switchDataSource(url);
           this.#state.filteredData = data;
 
           // Reset filters and repopulate dropdowns
@@ -380,6 +363,9 @@ class App {
           this.#ui.elements.searchInput.value = "";
           this.#initFilters(data);
           this.handleFilterChange();
+
+          // Refresh Live Dashboard if it's active
+          this.liveDashboard?.refresh(true);
         } catch (error) {
           console.error("Failed to switch data source:", error);
         } finally {

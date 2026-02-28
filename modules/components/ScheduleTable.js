@@ -2,7 +2,6 @@ import { Utils } from "../Utils.js";
 import { Icons } from "../Icons.js";
 
 export class ScheduleTable {
-  #container;
   #tbody;
 
   constructor() {

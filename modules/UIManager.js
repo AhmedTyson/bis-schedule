@@ -1,12 +1,9 @@
 import { Config } from "./Config.js";
-import { Utils } from "./Utils.js";
 import { Icons } from "./Icons.js";
 import { ScheduleTable } from "./components/ScheduleTable.js";
 
 export class UIManager {
   #elements = {};
-  #paginationCallback = null;
-  #currentPage = 1;
   #scheduleTable;
 
   constructor() {
@@ -218,9 +215,6 @@ export class UIManager {
    * @param {Function} onPageChange - Callback for page changes.
    */
   renderPagination(totalItems, currentPage, onPageChange) {
-    this.#paginationCallback = onPageChange;
-    this.#currentPage = currentPage;
-
     const el = this.#elements;
     if (el.pagination) el.pagination.dataset.currentPage = currentPage;
 

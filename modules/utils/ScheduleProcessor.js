@@ -18,7 +18,7 @@ export class ScheduleProcessor {
       if (!item.time) return;
 
       // Handle "08:00 AM – 10:00 AM" (flexible dash and whitespace)
-      const parts = item.time.split(/\s*[–\-\—]\s*/);
+      const parts = item.time.split(/\s*[–\-—]\s*/);
       if (parts.length !== 2) return;
 
       const [startStr, endStr] = parts;
@@ -27,7 +27,6 @@ export class ScheduleProcessor {
 
       if (status === "ACTIVE") {
         const progress = TimeUtils.getProgress(startStr, endStr, date);
-        const startMin = TimeUtils.timeToMinutes(startStr);
         const endMin = TimeUtils.timeToMinutes(endStr);
         const nowMin = TimeUtils.getCurrentMinutes(date);
         const timeLeft = endMin - nowMin;

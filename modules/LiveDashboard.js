@@ -125,7 +125,7 @@ export class LiveDashboard {
 
       const uniqueTimes = [...new Set(upcoming.map((item) => item.startTime))];
 
-      uniqueTimes.forEach((time, index) => {
+      uniqueTimes.forEach((time) => {
         const groupItems = groups[time];
         const label = `From ${time}`;
 

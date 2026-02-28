@@ -1,5 +1,3 @@
-import { Utils } from "./Utils.js";
-
 export class FilterManager {
   #filters = { search: "", subject: "all", group: "all", day: "all" };
 
