@@ -1,5 +1,7 @@
 export const Config = {
-  DATA_URL: "schedule-data.json",
+  DATA_URL: "schedule-data.real.json",
+  SECTIONS_DATA_URL:
+    "https://gist.githubusercontent.com/AhmedTyson/c16502b14a67f6003569cbb6e7876803/raw/sections-data.real.json",
   DESKTOP_WIDTH: 1200,
   FRIDAY_MEME_COUNT: 5,
   SUBJECT_ACRONYMS: {

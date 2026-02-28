@@ -155,6 +155,41 @@ export class DataService {
   }
 
   /**
+   * Switches the data source to a different JSON file (e.g., lectures vs sections).
+   * @param {string} url - The URL of the new data source.
+   * @returns {Promise<Array>} The newly loaded data.
+   */
+  async switchDataSource(url) {
+    try {
+      const response = await fetch(url + "?v=2");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      this.#data = await response.json();
+
+      // Apply Ramadan Mode mapping if enabled
+      if (Config.RAMADAN_MODE?.ENABLED) {
+        this.#data = this.#data.map((item) => {
+          if (Config.RAMADAN_MODE.TIME_MAP[item.time]) {
+            return {
+              ...item,
+              originalTime: item.time,
+              time: Config.RAMADAN_MODE.TIME_MAP[item.time],
+            };
+          }
+          return item;
+        });
+      }
+
+      // Reinitialize Worker with new data
+      await this.#sendToWorker("INIT", { data: this.#data });
+
+      return this.#data;
+    } catch (error) {
+      console.error("DataService switchDataSource Error:", error);
+      throw error;
+    }
+  }
+
+  /**
    * Retrieves classes that are currently active or starting within the next 15 minutes.
    * @returns {Array} Array of enriched class objects with status and progress.
    */

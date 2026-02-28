@@ -292,6 +292,58 @@ a.brand-badge i {
   min-width: 200px; /* Better balance between the super-small and large */
 }
 
+/* Data Source Toggle (Lectures / Sections) — Compact Inline Pills */
+.data-source-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid var(--border);
+}
+
+.source-pill {
+  background: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  color: var(--text-dim, #71717a);
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.source-pill:hover {
+  color: var(--text-main, #ededed);
+}
+
+.source-pill.active {
+  background: rgba(168, 85, 247, 0.12);
+  color: var(--accent);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.source-pill i {
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .source-pill {
+    padding: 2px 6px;
+    font-size: 9px;
+  }
+}
+
 /* WIDGET MODE */
 body.widget-mode .container {
   max-width: 100%;

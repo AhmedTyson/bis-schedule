@@ -28,6 +28,7 @@ class App {
   async init() {
     this.#initGlobalListeners();
     this.#ui.initViewSwitcher((view) => this.#handleViewChange(view));
+    this.#initDataSourceSwitcher();
 
     // Show Ramadan Indicator if enabled
     if (Config.RAMADAN_MODE?.ENABLED) {
@@ -331,6 +332,61 @@ class App {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
+  }
+
+  #initDataSourceSwitcher() {
+    const container = document.getElementById("data-source-switcher");
+    if (!container) return;
+
+    const buttons = container.querySelectorAll(".source-pill");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const source = btn.dataset.source;
+        if (btn.classList.contains("active")) return;
+
+        // Update active state
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Switch data source
+        const url =
+          source === "sections" ? Config.SECTIONS_DATA_URL : Config.DATA_URL;
+
+        try {
+          this.#ui.setLoading(true);
+
+          // Use real data file in local dev
+          let fetchUrl = url;
+          if (
+            (window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1") &&
+            source === "lectures"
+          ) {
+            try {
+              const checkRes = await fetch("schedule-data.real.json?v=2", {
+                method: "HEAD",
+              });
+              if (checkRes.ok) fetchUrl = "schedule-data.real.json";
+            } catch (e) {
+              /* fallback */
+            }
+          }
+
+          const data = await this.#dataService.switchDataSource(fetchUrl);
+          this.#state.filteredData = data;
+
+          // Reset filters and repopulate dropdowns
+          this.#filters.reset();
+          this.#ui.elements.searchInput.value = "";
+          this.#initFilters(data);
+          this.handleFilterChange();
+        } catch (error) {
+          console.error("Failed to switch data source:", error);
+        } finally {
+          this.#ui.setLoading(false);
+        }
+      });
+    });
   }
 
   #handleViewChange(view) {
