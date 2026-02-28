@@ -51,12 +51,31 @@ export class DataService {
 
       // If we are on production and the global promise exists, use it
       if (window.__DATA_PROMISE__ && fetchUrl.includes(Config.DATA_URL)) {
-        dataResponse = await window.__DATA_PROMISE__;
+        try {
+          dataResponse = await window.__DATA_PROMISE__;
+          if (!dataResponse)
+            throw new Error("Pre-fetch failed or returned null");
+        } catch (e) {
+          console.warn(
+            "Pre-fetch failed, falling back to fresh fetch:",
+            e.message,
+          );
+          const response = await fetch(fetchUrl);
+          if (!response.ok)
+            throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
+          dataResponse = await response.json();
+        }
       } else {
         const response = await fetch(fetchUrl);
         if (!response.ok)
           throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
         dataResponse = await response.json();
+      }
+
+      if (!Array.isArray(dataResponse)) {
+        throw new Error(
+          "Invalid data format: Expected an array of schedule items.",
+        );
       }
 
       this.#data = dataResponse;
