@@ -3,6 +3,7 @@ import { Icons } from "../Icons.js";
 
 export class ScheduleTable {
   #tbody;
+  #currentFrame;
 
   constructor() {
     this.#tbody = document.getElementById("table-body");
@@ -10,8 +11,14 @@ export class ScheduleTable {
 
   render(data, searchTerm) {
     if (!this.#tbody) return;
-    this.#tbody.innerHTML = "";
 
+    // 1. Cancel any pending render to prevent duplication
+    if (this.#currentFrame) {
+      cancelAnimationFrame(this.#currentFrame);
+    }
+
+    // 2. Clear table state
+    this.#tbody.innerHTML = "";
     if (!data || data.length === 0) return;
 
     let index = 0;
@@ -30,11 +37,13 @@ export class ScheduleTable {
       this.#tbody.appendChild(fragment);
 
       if (index < data.length) {
-        requestAnimationFrame(renderChunk);
+        this.#currentFrame = requestAnimationFrame(renderChunk);
+      } else {
+        this.#currentFrame = null;
       }
     };
 
-    requestAnimationFrame(renderChunk);
+    this.#currentFrame = requestAnimationFrame(renderChunk);
   }
 
   #getRowTemplate(item, searchTerm) {

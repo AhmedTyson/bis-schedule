@@ -1,28 +1,48 @@
 const fs = require("fs");
 
-// Detect if we are running in a CI environment like Netlify
+// Detect environments
 const IS_NETLIFY = process.env.NETLIFY === "true" || !!process.env.BUILD_ID;
+const IS_GITHUB_ACTIONS = process.env.GITHUB_ACTIONS === "true";
+
+// Load .env manually if it exists (don't require external libs)
+if (!IS_NETLIFY && !IS_GITHUB_ACTIONS && fs.existsSync(".env")) {
+  const envFile = fs.readFileSync(".env", "utf8");
+  envFile.split("\n").forEach((line) => {
+    const [key, ...value] = line.split("=");
+    if (key && value) {
+      process.env[key.trim()] = value
+        .join("=")
+        .trim()
+        .replace(/^['"]|['"]$/g, "");
+    }
+  });
+}
 
 /**
  * Fetches data from a URL and saves it to a file.
- * Exits the process with error code 1 if a required URL is missing on CI or fetch fails.
  */
 async function fetchData(url, filename, envVarName) {
+  // 1. GitHub Actions Protection: Never inject real data in public CI
+  if (IS_GITHUB_ACTIONS) {
+    console.log(
+      `🛡️ GitHub Actions detected. Skipping real data for ${filename} to protect privacy.`,
+    );
+    return false;
+  }
+
+  // 2. Netlify Enforcement: Build must fail if real data is missing
+  if (IS_NETLIFY && !url) {
+    console.error(`❌ CRITICAL ERROR: ${envVarName} is NOT set on Netlify.`);
+    console.error(
+      `   The build MUST fail to prevent demo data from being published.`,
+    );
+    process.exit(1);
+  }
+
+  // 3. Local / Other Environments: Fallback to demo data if no URL
   if (!url) {
-    if (IS_NETLIFY) {
-      console.error(
-        `❌ CRITICAL ERROR: Environment variable ${envVarName} is NOT set on Netlify.`,
-      );
-      console.error(
-        `   The build MUST fail to prevent demo data from being published.`,
-      );
-      console.error(
-        `   Please add ${envVarName} to your Netlify Site Settings.`,
-      );
-      process.exit(1);
-    }
     console.warn(
-      `⚠️ Warning: ${envVarName} is NOT set. Using repository demo data for ${filename}.`,
+      `⚠️ Warning: ${envVarName} is NOT set. Using demo data for ${filename}.`,
     );
     return false;
   }
@@ -48,9 +68,6 @@ async function fetchData(url, filename, envVarName) {
       console.error(
         `❌ ERROR: Expected JSON but received HTML for ${filename}.`,
       );
-      console.error(
-        `   Check if ${envVarName} points to the 'RAW' Gist URL and is publicly accessible.`,
-      );
       process.exit(1);
     }
 
@@ -73,23 +90,13 @@ async function fetchData(url, filename, envVarName) {
 
 async function injectAll() {
   console.log("🛠️ Starting Data Injection Process...");
-  if (IS_NETLIFY) {
-    console.log("🌐 Build Environment: Netlify detected.");
-  } else {
-    console.log("💻 Build Environment: Local development.");
-  }
 
-  // Diagnostic: Log all 'REAL_' variables (masked) to help debug presence
-  const realKeys = Object.keys(process.env).filter((k) =>
-    k.startsWith("REAL_"),
-  );
-  if (realKeys.length > 0) {
-    console.log(
-      "🔍 Detected REAL_* variables in environment:",
-      realKeys.join(", "),
-    );
+  if (IS_NETLIFY) {
+    console.log("🌐 Build Environment: Netlify (Production/Staging)");
+  } else if (IS_GITHUB_ACTIONS) {
+    console.log("🛡️ Build Environment: GitHub Actions (Public CI)");
   } else {
-    console.warn("🔍 No REAL_* environment variables detected!");
+    console.log("💻 Build Environment: Local development");
   }
 
   // Actually attempt to fetch data

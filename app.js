@@ -71,15 +71,6 @@ class App {
 
       this.#initFilters(data);
       this.#restoreFiltersFromURL();
-
-      // Self-Healing: Check if dropdowns are empty after a short delay and retry
-      setTimeout(() => {
-        const subjectOptions = document.getElementById("subject-options");
-        if (subjectOptions && subjectOptions.children.length <= 1) {
-          console.warn("Dropdowns appear empty, retrying population...");
-          this.#initFilters(data);
-        }
-      }, 500);
     } catch (error) {
       this.#ui.elements.noResults.innerHTML = `<div class="error-message">Error loading data: ${error.message}</div>`;
       this.#ui.elements.noResults.classList.remove("hidden");
@@ -132,24 +123,28 @@ class App {
       }
     });
   }
-
   #initFilters(data) {
-    // Initialize Dropdowns using generic handler
+    this.#setupDropdownListeners();
+
+    this.#populateSubjectFilters(data);
+    this.#populateGroupFilters(data);
+  }
+
+  #setupDropdownListeners() {
+    if (Object.keys(this.#dropdowns).length > 0) return;
+
     ["subject", "group", "day"].forEach((key) => {
       const id = `${key}-dropdown`;
-      if (this.#dropdowns[id]) this.#dropdowns[id].destroy();
-
       this.#dropdowns[id] = new CustomSelect(id, (dropdownId, value) => {
         const filterKey = dropdownId.split("-")[0];
         this.#filters.update(filterKey, value);
 
         // Special case: Subject change affects Group options
         if (filterKey === "subject") {
-          this.#populateGroupFilters(
-            this.#dataService
-              .getAllData()
-              .filter((item) => value === "all" || item.subject === value),
-          );
+          const subjectData = this.#dataService
+            .getAllData()
+            .filter((item) => value === "all" || item.subject === value);
+          this.#populateGroupFilters(subjectData);
           this.#filters.update("group", "all");
           this.#dropdowns["group-dropdown"].reset();
         }
@@ -158,9 +153,6 @@ class App {
         this.#syncURLFromFilters();
       });
     });
-
-    this.#populateSubjectFilters(data);
-    this.#populateGroupFilters(data);
   }
 
   #populateSubjectFilters(data) {
@@ -357,9 +349,18 @@ class App {
           const data = await this.#dataService.switchDataSource(url);
           this.#state.filteredData = data;
 
-          // Reset filters and repopulate dropdowns
+          // Reset filters, UI, and URL
           this.#filters.reset();
           this.#ui.elements.searchInput.value = "";
+          Object.values(this.#dropdowns).forEach((d) => d.reset());
+
+          // Clear URL query parameters
+          history.replaceState(
+            null,
+            "",
+            window.location.pathname + window.location.hash,
+          );
+
           this.#initFilters(data);
           this.handleFilterChange();
 

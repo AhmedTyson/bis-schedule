@@ -1,0 +1,25 @@
+{
+  "name": "scedule-level-3-s2",
+  "version": "1.0.0",
+  "description": "> **Bilingual (Arabic/English) schedule search web app for BIS Level 3 students.**\r > Lightning-fast, offline-capable, and precision-engineered for mobile-first academic navigation.",
+  "main": "app.js",
+  "scripts": {
+    "build": "node inject-data.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmedTyson/bis-schedule.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AhmedTyson/bis-schedule/issues"
+  },
+  "homepage": "https://github.com/AhmedTyson/bis-schedule#readme",
+  "devDependencies": {
+    "is-even": "^1.0.0"
+  }
+}

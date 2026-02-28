@@ -49,7 +49,8 @@ export class DataService {
           [Config.SECTIONS_DATA_URL]: "sections-data.real.json",
         };
 
-        const fallback = fallbacks[Config.DATA_URL];
+        const fallback =
+          fallbacks[Config.DATA_URL] || fallbacks[Config.SECTIONS_DATA_URL];
         if (fallback) {
           try {
             const checkRes = await fetch(`${fallback}?v=2`, { method: "HEAD" });
@@ -168,22 +169,29 @@ export class DataService {
     try {
       let fetchUrl = url;
 
-      // Local Dev Fallback for Sections
+      // Local Dev Fallback for both types
       if (
-        (window.location.hostname === "localhost" ||
-          window.location.hostname === "127.0.0.1") &&
-        url === Config.SECTIONS_DATA_URL
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
       ) {
-        try {
-          const checkRes = await fetch("sections-data.real.json?v=2", {
-            method: "HEAD",
-          });
-          if (checkRes.ok) {
-            fetchUrl = "sections-data.real.json";
-            console.log("🔧 Local Dev: Switch using real sections dataset.");
+        const fallbacks = {
+          [Config.DATA_URL]: "schedule-data.real.json",
+          [Config.SECTIONS_DATA_URL]: "sections-data.real.json",
+        };
+        const fallback = fallbacks[url];
+
+        if (fallback) {
+          try {
+            const checkRes = await fetch(`${fallback}?v=2`, { method: "HEAD" });
+            if (checkRes.ok) {
+              fetchUrl = fallback;
+              console.log(
+                `🔧 Local Dev: Switch using real dataset (${fallback}).`,
+              );
+            }
+          } catch {
+            /* ignore */
           }
-        } catch {
-          /* ignore */
         }
       }
 
