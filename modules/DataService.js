@@ -39,22 +39,14 @@ export class DataService {
       // If index.html already fired the request, consume it instantly
       let dataResponse;
 
-      // --- Local Dev Sandbox Data ---
+      // Environment-specific URL resolution
       if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
       ) {
-        try {
-          const checkRes = await fetch("schedule-data.real.json?v=2", {
-            method: "HEAD",
-          });
-          if (checkRes.ok) {
-            fetchUrl = "schedule-data.real.json?v=2";
-            console.log("🔧 Local Dev: Using real dataset.");
-          }
-        } catch {
-          /* Fallback gracefully */
-        }
+        console.log("🔧 Local Dev: Using local datasets.");
+        // URL is already local in Config, but we ensure it matches the pattern
+        fetchUrl = fetchUrl.replace(/^https:\/\/.*?\/raw\//, "");
       }
 
       // If we are on production and the global promise exists, use it
@@ -62,7 +54,8 @@ export class DataService {
         dataResponse = await window.__DATA_PROMISE__;
       } else {
         const response = await fetch(fetchUrl);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok)
+          throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
         dataResponse = await response.json();
       }
 
@@ -160,8 +153,18 @@ export class DataService {
    */
   async switchDataSource(url) {
     try {
-      const response = await fetch(url + "?v=2");
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      let fetchUrl = url + "?v=2";
+
+      if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+      ) {
+        fetchUrl = url.replace(/^https:\/\/.*?\/raw\//, "") + "?v=2";
+      }
+
+      const response = await fetch(fetchUrl);
+      if (!response.ok)
+        throw new Error(`HTTP ${response.status} at ${fetchUrl}`);
       this.#data = await response.json();
 
       // Apply Ramadan Mode mapping if enabled
@@ -198,7 +201,7 @@ export class DataService {
 
   // --- Worker Communication ---
 
-  #sendToWorker(type, payload, timeoutMs = 5000) {
+  #sendToWorker(type, payload, timeoutMs = 10000) {
     return new Promise((resolve, reject) => {
       const id = this.#requestIdCounter++;
       const timer = setTimeout(() => {
