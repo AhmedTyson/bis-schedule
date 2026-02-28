@@ -1,14 +1,28 @@
 const fs = require("fs");
 
+// Detect if we are running in a CI environment like Netlify
+const IS_NETLIFY = process.env.NETLIFY === "true" || !!process.env.BUILD_ID;
+
 /**
  * Fetches data from a URL and saves it to a file.
- * Exits the process with error code 1 if a required URL is provided but fetch fails.
+ * Exits the process with error code 1 if a required URL is missing on CI or fetch fails.
  */
 async function fetchData(url, filename, envVarName) {
   if (!url) {
-    console.warn(`⚠️ Warning: Environment variable ${envVarName} is NOT set.`);
+    if (IS_NETLIFY) {
+      console.error(
+        `❌ CRITICAL ERROR: Environment variable ${envVarName} is NOT set on Netlify.`,
+      );
+      console.error(
+        `   The build MUST fail to prevent demo data from being published.`,
+      );
+      console.error(
+        `   Please add ${envVarName} to your Netlify Site Settings.`,
+      );
+      process.exit(1);
+    }
     console.warn(
-      `   Skipping injection for ${filename}. Repository demo data will be used.`,
+      `⚠️ Warning: ${envVarName} is NOT set. Using repository demo data for ${filename}.`,
     );
     return false;
   }
@@ -47,44 +61,53 @@ async function fetchData(url, filename, envVarName) {
       return true;
     } catch (parseError) {
       console.error(
-        `❌ ERROR: Failed to parse JSON for ${filename}: ${parseError.message}`,
+        `❌ ERROR: JSON syntax error in ${filename}: ${parseError.message}`,
       );
       process.exit(1);
     }
   } catch (e) {
-    console.error(
-      `❌ ERROR: Network error while injecting ${filename}:`,
-      e.message,
-    );
+    console.error(`❌ ERROR: Network failure for ${filename}:`, e.message);
     process.exit(1);
   }
 }
 
 async function injectAll() {
   console.log("🛠️ Starting Data Injection Process...");
+  if (IS_NETLIFY) {
+    console.log("🌐 Build Environment: Netlify detected.");
+  } else {
+    console.log("💻 Build Environment: Local development.");
+  }
 
-  const lectureSuccess = await fetchData(
+  // Diagnostic: Log all 'REAL_' variables (masked) to help debug presence
+  const realKeys = Object.keys(process.env).filter((k) =>
+    k.startsWith("REAL_"),
+  );
+  if (realKeys.length > 0) {
+    console.log(
+      "🔍 Detected REAL_* variables in environment:",
+      realKeys.join(", "),
+    );
+  } else {
+    console.warn("🔍 No REAL_* environment variables detected!");
+  }
+
+  // Actually attempt to fetch data
+  await fetchData(
     process.env.REAL_DATA_URL,
     "schedule-data.json",
     "REAL_DATA_URL",
   );
-
-  const sectionSuccess = await fetchData(
+  await fetchData(
     process.env.REAL_SECTIONS_URL,
     "sections-data.json",
     "REAL_SECTIONS_URL",
   );
 
-  if (!lectureSuccess && !sectionSuccess) {
-    console.log(
-      "ℹ️ No environment variables found. Build will proceed with repository demo data.",
-    );
-  } else {
-    console.log("✨ Data injection phase completed.");
-  }
+  console.log("✨ Data injection phase completed.");
 }
 
 injectAll().catch((err) => {
-  console.error("❌ UNEXPECTED ERROR in script:", err);
+  console.error("❌ UNEXPECTED ERROR in injection script:", err);
   process.exit(1);
 });
