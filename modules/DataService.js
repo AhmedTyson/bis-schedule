@@ -67,6 +67,7 @@ export class DataService {
       // If we are on production and the global promise exists, use it
       if (window.__DATA_PROMISE__ && fetchUrl.includes(Config.DATA_URL)) {
         dataResponse = await window.__DATA_PROMISE__;
+        window.__DATA_PROMISE__ = null; // Prevent reusing the promise
       } else {
         const response = await fetch(fetchUrl);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);

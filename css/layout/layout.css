@@ -117,7 +117,6 @@ header {
 .toggle-btn i {
   font-size: 0.85em;
 }
-
 @media (max-width: 768px) {
   header {
     flex-direction: column;

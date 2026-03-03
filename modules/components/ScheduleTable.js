@@ -4,6 +4,7 @@ import { Icons } from "../Icons.js";
 export class ScheduleTable {
   #tbody;
   #currentFrame;
+  #renderId = 0;
 
   constructor() {
     this.#tbody = document.getElementById("table-body");
@@ -12,9 +13,12 @@ export class ScheduleTable {
   render(data, searchTerm) {
     if (!this.#tbody) return;
 
+    const currentRenderId = ++this.#renderId;
+
     // 1. Cancel any pending render to prevent duplication
     if (this.#currentFrame) {
       cancelAnimationFrame(this.#currentFrame);
+      this.#currentFrame = null;
     }
 
     // 2. Clear table state
@@ -25,6 +29,8 @@ export class ScheduleTable {
     const CHUNK_SIZE = 15; // Optimize TBT by yielding the main thread
 
     const renderChunk = () => {
+      if (currentRenderId !== this.#renderId) return;
+
       const fragment = document.createDocumentFragment();
       const end = Math.min(index + CHUNK_SIZE, data.length);
 
