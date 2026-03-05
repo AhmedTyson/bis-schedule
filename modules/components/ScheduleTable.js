@@ -49,7 +49,16 @@ export class ScheduleTable {
       }
     };
 
-    this.#currentFrame = requestAnimationFrame(renderChunk);
+    // FIX: Render the first chunk SYNCHRONOUSLY to eliminate the
+    // 1-frame empty-table flash. Without this, innerHTML="" clears the
+    // table, but new rows only appear in the NEXT animation frame (~16ms).
+    // Subsequent chunks still use rAF to keep the main thread responsive.
+    renderChunk();
+
+    // If there's more data beyond the first chunk, schedule the rest via rAF
+    if (index < data.length) {
+      this.#currentFrame = requestAnimationFrame(renderChunk);
+    }
   }
 
   #getRowTemplate(item, searchTerm) {

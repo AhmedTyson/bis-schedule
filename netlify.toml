@@ -2,7 +2,14 @@
   command = "node inject-data.js"
   publish = "."
 
-# Global Security Headers
+# ──────────────────────────────────────────────
+# HEADER ORDER MATTERS: Netlify uses LAST match.
+# Global catch-all MUST come FIRST, then specific
+# overrides for cacheable assets AFTER.
+# ──────────────────────────────────────────────
+
+# 1. Global defaults (HTML pages, API responses, etc.)
+#    max-age=0 ensures HTML is always fresh.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -10,21 +17,35 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(self), microphone=(), camera=(), payment=()"
+    # FIX: Changed from require-corp to credentialless.
+    # require-corp BLOCKS cross-origin resources (Google Fonts, Font Awesome CDN)
+    # that don't send Cross-Origin-Resource-Policy headers.
+    # credentialless allows anonymous cross-origin loads while maintaining isolation.
+    Cross-Origin-Embedder-Policy = "credentialless"
     Cross-Origin-Opener-Policy = "same-origin"
-    Cross-Origin-Embedder-Policy = "require-corp"
-    Cross-Origin-Resource-Policy = "same-origin"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
+# 2. CSS — cache for 1 year (versioned via ?v= query string)
 [[headers]]
   for = "/*.css"
   [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
+# 3. JS modules — cache for 1 year (versioned via ?v= query string)
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
 
+# 4. JSON data files — short cache, revalidate on every visit
+#    Data is injected at build time, so it changes per deploy.
 [[headers]]
-  for = "/*"
+  for = "/*.json"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=60, must-revalidate"
+
+# 5. Static assets (images, fonts) — long cache
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

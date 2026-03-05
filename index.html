@@ -59,6 +59,24 @@
       );
     </script>
 
+    <!-- WPO: Module Preloads — Eliminate ES Module Waterfall
+         Without these, the browser discovers imports sequentially:
+         Round 1: app.js → Round 2: 8 imports → Round 3: 3 deep imports
+         Each round is a full network RTT (~400ms on Slow 3G = 1.2s wasted).
+         modulepreload tells the browser to fetch ALL modules in parallel. -->
+    <link rel="modulepreload" href="app.js?v=2" />
+    <link rel="modulepreload" href="modules/Config.js" />
+    <link rel="modulepreload" href="modules/Utils.js" />
+    <link rel="modulepreload" href="modules/CustomSelect.js" />
+    <link rel="modulepreload" href="modules/DataService.js" />
+    <link rel="modulepreload" href="modules/UIManager.js" />
+    <link rel="modulepreload" href="modules/FilterManager.js" />
+    <link rel="modulepreload" href="modules/DOMUtils.js" />
+    <link rel="modulepreload" href="modules/Icons.js" />
+    <link rel="modulepreload" href="modules/components/ScheduleTable.js" />
+    <link rel="modulepreload" href="modules/utils/TimeUtils.js" />
+    <link rel="modulepreload" href="modules/utils/ScheduleProcessor.js" />
+
     <!-- Fonts (High Priority Preconnect & Preload) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -649,19 +667,16 @@
       </main>
     </div>
 
-    <!-- EMERGENCY: Force SW Unregister for ALL users -->
+    <!-- Service Worker Registration -->
     <script>
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then((registrations) => {
-          for (const registration of registrations) {
-            registration.unregister();
-          }
-        });
-        if ("caches" in window) {
-          caches.keys().then((names) => {
-            for (const name of names) caches.delete(name);
+        // Register the caching SW after the page loads to avoid
+        // competing with critical resource downloads.
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch((err) => {
+            console.warn("SW registration failed:", err);
           });
-        }
+        });
       }
     </script>
 

@@ -44,11 +44,16 @@ export class CustomSelect {
 
     this.#updateOptionAccessibility();
 
-    // Watch for dynamic options
+    // Watch for dynamic options (debounced to avoid thrashing on batch adds)
     if (this.#observer) this.#observer.disconnect();
-    this.#observer = new MutationObserver(() =>
-      this.#updateOptionAccessibility(),
-    );
+    let observerTimer = null;
+    this.#observer = new MutationObserver(() => {
+      // FIX: Debounce observer — when populateContainer() adds N options,
+      // the observer fires N times. We only need to run once after all
+      // mutations settle.
+      clearTimeout(observerTimer);
+      observerTimer = setTimeout(() => this.#updateOptionAccessibility(), 0);
+    });
     this.#observer.observe(this.#optionsContainer, { childList: true });
   }
 

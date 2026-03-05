@@ -39,7 +39,9 @@ export class DataService {
       // If index.html already fired the request, consume it instantly
       let dataResponse;
 
-      // --- Local Dev Sandbox Data ---
+      // --- Local Dev: Use real dataset if available ---
+      // FIX: Removed the unnecessary HEAD request. Just try fetching the
+      // real file directly — it's simpler and saves one network round-trip.
       if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
@@ -52,15 +54,8 @@ export class DataService {
         const fallback =
           fallbacks[Config.DATA_URL] || fallbacks[Config.SECTIONS_DATA_URL];
         if (fallback) {
-          try {
-            const checkRes = await fetch(`${fallback}?v=2`, { method: "HEAD" });
-            if (checkRes.ok) {
-              fetchUrl = `${fallback}?v=2`;
-              console.log(`🔧 Local Dev: Using real dataset (${fallback}).`);
-            }
-          } catch {
-            /* Fallback gracefully */
-          }
+          fetchUrl = `${fallback}?v=2`;
+          console.log(`🔧 Local Dev: Using real dataset (${fallback}).`);
         }
       }
 
@@ -90,7 +85,7 @@ export class DataService {
         });
       }
 
-      // Initialize Worker
+      // Initialize Worker with the data
       await this.#sendToWorker("INIT", { data: this.#data });
 
       return this.#data;
@@ -182,17 +177,8 @@ export class DataService {
         const fallback = fallbacks[url];
 
         if (fallback) {
-          try {
-            const checkRes = await fetch(`${fallback}?v=2`, { method: "HEAD" });
-            if (checkRes.ok) {
-              fetchUrl = fallback;
-              console.log(
-                `🔧 Local Dev: Switch using real dataset (${fallback}).`,
-              );
-            }
-          } catch {
-            /* ignore */
-          }
+          fetchUrl = fallback;
+          console.log(`🔧 Local Dev: Switch using real dataset (${fallback}).`);
         }
       }
 
