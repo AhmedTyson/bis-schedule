@@ -44,11 +44,21 @@
       type="image/svg+xml"
       href="https://api.iconify.design/fa-solid:calendar-check.svg?color=%23a855f7"
     />
+    <link rel="apple-touch-icon" href="assets/bis-schedule-icon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0a0711" />
 
     <meta name="robots" content="index, follow" />
     <!-- SEO Boost -->
 
-    <!-- Preload schedule data to begin download immediately -->
+    <!-- Preload critical assets to begin download immediately -->
+    <link
+      rel="preload"
+      href="assets/bis-schedule-icon.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
     <link rel="preload" href="schedule-data.json?v=2" as="fetch" crossorigin />
     <script>
       // WPO Phase 2: Instant Data Fetch
@@ -126,12 +136,7 @@
         inset: 0;
         width: 100vw;
         height: 100dvh;
-        background: var(--bg-app);
-        background: radial-gradient(
-          circle at center,
-          var(--bg-panel) 0%,
-          var(--bg-app) 100%
-        );
+        background-color: #0a0711; /* Match SVG background perfectly */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -140,19 +145,29 @@
       }
       #loader::after {
         content: "LOADING";
-        margin-top: 24px;
+        margin-top: 32px;
         font-family: var(--font-mono);
         font-size: 0.85rem;
         letter-spacing: 0.3em;
         color: var(--text-muted);
         animation: pulse 1.5s ease-in-out infinite;
       }
-      .snowflake-spinner {
-        color: var(--accent);
-        filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.6));
-        animation: snow-spin 3s linear infinite;
-        display: inline-block;
-        font-size: 2rem;
+      .splash-icon {
+        width: 110px;
+        height: 110px;
+        border-radius: 22px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+      @media (min-width: 768px) {
+        .splash-icon {
+          width: 180px;
+          height: 180px;
+          border-radius: 36px;
+        }
+        #loader::after {
+          margin-top: 48px;
+          font-size: 1rem;
+        }
       }
       @keyframes pulse {
         0%,
@@ -161,14 +176,6 @@
         }
         50% {
           opacity: 1;
-        }
-      }
-      @keyframes snow-spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
         }
       }
 
@@ -338,7 +345,11 @@
   </head>
   <body>
     <div id="loader">
-      <i class="fa-solid fa-snowflake snowflake-spinner"></i>
+      <img
+        src="assets/bis-schedule-icon.svg"
+        class="splash-icon"
+        alt="Loading Logo"
+      />
     </div>
 
     <div class="container">

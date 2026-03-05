@@ -1,0 +1,17 @@
+{
+  "name": "BIS Schedule Search",
+  "short_name": "BIS Schedule",
+  "description": "Quickly find your BIS schedule: filters for subjects, groups, and doctors. Modern, fast, and mobile-friendly.",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#0a0711",
+  "theme_color": "#0a0711",
+  "icons": [
+    {
+      "src": "assets/bis-schedule-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BIS Schedule Search App Icon">
+  <defs>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  GRADIENTS                                   -->
+    <!-- ═══════════════════════════════════════════ -->
+
+    <!-- Background radial dark -->
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%"   stop-color="#1c1428"/>
+      <stop offset="100%" stop-color="#080610"/>
+    </radialGradient>
+
+    <!-- Calendar body gradient — glossy dark chrome -->
+    <linearGradient id="calBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#2a2040"/>
+      <stop offset="50%"  stop-color="#1a1428"/>
+      <stop offset="100%" stop-color="#0e0b1a"/>
+    </linearGradient>
+
+    <!-- Calendar top header — purple richness -->
+    <linearGradient id="calHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+
+    <!-- Magnifier lens glass -->
+    <radialGradient id="lensGrad" cx="38%" cy="35%" r="55%">
+      <stop offset="0%"   stop-color="#2e1f5e" stop-opacity="0.85"/>
+      <stop offset="70%"  stop-color="#130d2e" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0a0618" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Lens rim gradient — chrome/silver with purple tint -->
+    <linearGradient id="lensRim" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%"   stop-color="#c4b5fd"/>
+      <stop offset="25%"  stop-color="#7c3aed"/>
+      <stop offset="50%"  stop-color="#3b0764"/>
+      <stop offset="75%"  stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+
+    <!-- Handle gradient — chrome -->
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#a78bfa"/>
+      <stop offset="40%"  stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#2e1065"/>
+    </linearGradient>
+
+    <!-- Clock face gradient -->
+    <radialGradient id="clockFace" cx="40%" cy="35%" r="60%">
+      <stop offset="0%"   stop-color="#312060"/>
+      <stop offset="100%" stop-color="#1a0f3a"/>
+    </radialGradient>
+
+    <!-- Purple cell fill -->
+    <linearGradient id="cellPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+
+    <!-- Soft cell fill -->
+    <linearGradient id="cellSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#3b2d6e"/>
+      <stop offset="100%" stop-color="#231b4a"/>
+    </linearGradient>
+
+    <!-- Glass highlight overlay -->
+    <linearGradient id="glassSheen" x1="0%" y1="0%" x2="30%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Outer glow filter -->
+    <filter id="outerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0.6 0 0.8 0 0.1
+                0   0 0.5 0 0
+                0.8 0 1   0 0.3
+                0   0 0   1 0" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Drop shadow for calendar -->
+    <filter id="calShadow" x="-20%" y="-10%" width="150%" height="150%">
+      <feDropShadow dx="4" dy="8" stdDeviation="16" flood-color="#7c3aed" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Lens glow filter -->
+    <filter id="lensGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0.5 0 0.9 0 0.1
+                0   0 0.4 0 0
+                0.9 0 1   0 0.4
+                0   0 0   1 0" result="cb"/>
+      <feMerge>
+        <feMergeNode in="cb"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Handle shadow -->
+    <filter id="handleShadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="6" flood-color="#4c1d95" flood-opacity="0.7"/>
+    </filter>
+
+    <!-- Shimmer gradient animated -->
+    <linearGradient id="shimmer" x1="-100%" y1="0%" x2="200%" y2="0%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="45%"  stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="#c4b5fd" stop-opacity="0.18"/>
+      <stop offset="55%"  stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+        values="-512 0; 512 0; -512 0" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+
+    <!-- Clip for calendar body rounded rect -->
+    <clipPath id="calClip">
+      <rect x="82" y="100" width="290" height="290" rx="36" ry="36"/>
+    </clipPath>
+
+    <!-- Clip for lens circle -->
+    <clipPath id="lensClip">
+      <circle cx="270" cy="265" r="108"/>
+    </clipPath>
+
+  </defs>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  CSS ANIMATIONS                              -->
+  <!-- ═══════════════════════════════════════════ -->
+  <style>
+    /* Breathing glow on the entire icon group */
+    #iconRoot {
+      animation: breathe 3.5s ease-in-out infinite;
+      transform-origin: 256px 256px;
+    }
+    @keyframes breathe {
+      0%   { filter: drop-shadow(0 0 14px rgba(139, 92, 246, 0.4)); }
+      50%  { filter: drop-shadow(0 0 32px rgba(167, 139, 250, 0.75)) drop-shadow(0 0 60px rgba(109, 40, 217, 0.3)); }
+      100% { filter: drop-shadow(0 0 14px rgba(139, 92, 246, 0.4)); }
+    }
+
+    /* Rim glow pulse on lens ring */
+    #lensRimRing {
+      animation: rimPulse 3.5s ease-in-out infinite;
+      transform-origin: 270px 265px;
+    }
+    @keyframes rimPulse {
+      0%   { opacity: 0.85; }
+      50%  { opacity: 1; }
+      100% { opacity: 0.85; }
+    }
+
+    /* Clock hands sweep */
+    #clockMinute {
+      animation: minuteSweep 8s linear infinite;
+      transform-origin: 270px 265px;
+    }
+    @keyframes minuteSweep {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    #clockHour {
+      animation: hourSweep 96s linear infinite;
+      transform-origin: 270px 265px;
+    }
+    @keyframes hourSweep {
+      from { transform: rotate(-30deg); }
+      to   { transform: rotate(330deg); }
+    }
+
+    /* Calendar ring bounce */
+    #calRingLeft, #calRingRight {
+      animation: ringBounce 3.5s ease-in-out infinite;
+      transform-origin: 256px 100px;
+    }
+    @keyframes ringBounce {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-3px); }
+    }
+
+    /* Shimmer sweep on calendar */
+    #shimmerRect {
+      animation: shimmerMove 4s ease-in-out infinite;
+    }
+    @keyframes shimmerMove {
+      0%   { opacity: 0; transform: translateX(-200px); }
+      20%  { opacity: 1; }
+      60%  { opacity: 1; }
+      80%  { opacity: 0; transform: translateX(200px); }
+      100% { opacity: 0; transform: translateX(200px); }
+    }
+
+    /* Subtle float for the whole icon */
+    #floatGroup {
+      animation: float 6s ease-in-out infinite;
+      transform-origin: 256px 256px;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  BACKGROUND                                  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#bgGrad)"/>
+
+  <!-- Subtle radial vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.5"/>
+  </radialGradient>
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#vignette)"/>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  MAIN ICON GROUP (breathing glow)           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <g id="iconRoot">
+  <g id="floatGroup">
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  CALENDAR BODY                               -->
+    <!-- ─────────────────────────────────────────── -->
+    <g filter="url(#calShadow)">
+      <!-- Main body -->
+      <rect x="82" y="100" width="290" height="290" rx="36" ry="36" fill="url(#calBody)"/>
+
+      <!-- Top stripe / header -->
+      <rect x="82" y="100" width="290" height="72" rx="36" ry="36" fill="url(#calHeader)"/>
+      <!-- Fix bottom corners of header -->
+      <rect x="82" y="136" width="290" height="36" fill="url(#calHeader)"/>
+
+      <!-- Glass sheen on body -->
+      <rect x="82" y="100" width="290" height="290" rx="36" ry="36" fill="url(#glassSheen)"/>
+
+      <!-- Shimmer sweep -->
+      <rect id="shimmerRect" x="82" y="100" width="290" height="290" rx="36" ry="36"
+        fill="url(#shimmer)" opacity="0"/>
+    </g>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  RING HOOKS                                  -->
+    <!-- ─────────────────────────────────────────── -->
+    <g id="calRingLeft">
+      <rect x="152" y="80" width="22" height="48" rx="11" ry="11"
+        fill="#c4b5fd" opacity="0.9"/>
+      <rect x="152" y="80" width="22" height="48" rx="11" ry="11"
+        fill="none" stroke="#7c3aed" stroke-width="2"/>
+    </g>
+    <g id="calRingRight">
+      <rect x="280" y="80" width="22" height="48" rx="11" ry="11"
+        fill="#c4b5fd" opacity="0.9"/>
+      <rect x="280" y="80" width="22" height="48" rx="11" ry="11"
+        fill="none" stroke="#7c3aed" stroke-width="2"/>
+    </g>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  CALENDAR GRID (visible behind lens)        -->
+    <!-- ─────────────────────────────────────────── -->
+    <g clip-path="url(#calClip)" opacity="0.9">
+      <!-- Row 1 -->
+      <rect x="100" y="196" width="38" height="30" rx="7" fill="url(#cellPurple)"/>
+      <rect x="148" y="196" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="196" y="196" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="244" y="196" width="38" height="30" rx="7" fill="url(#cellPurple)" opacity="0.7"/>
+      <rect x="292" y="196" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="340" y="196" width="26" height="30" rx="7" fill="url(#cellSoft)"/>
+
+      <!-- Row 2 -->
+      <rect x="100" y="237" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="148" y="237" width="38" height="30" rx="7" fill="url(#cellPurple)" opacity="0.85"/>
+      <rect x="196" y="237" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="244" y="237" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="292" y="237" width="38" height="30" rx="7" fill="url(#cellPurple)"/>
+      <rect x="340" y="237" width="26" height="30" rx="7" fill="url(#cellSoft)"/>
+
+      <!-- Row 3 -->
+      <rect x="100" y="278" width="38" height="30" rx="7" fill="url(#cellPurple)" opacity="0.6"/>
+      <rect x="148" y="278" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="196" y="278" width="38" height="30" rx="7" fill="url(#cellPurple)" opacity="0.9"/>
+      <rect x="244" y="278" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="292" y="278" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="340" y="278" width="26" height="30" rx="7" fill="url(#cellPurple)" opacity="0.5"/>
+
+      <!-- Row 4 -->
+      <rect x="100" y="319" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="148" y="319" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="196" y="319" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="244" y="319" width="38" height="30" rx="7" fill="url(#cellPurple)" opacity="0.75"/>
+      <rect x="292" y="319" width="38" height="30" rx="7" fill="url(#cellSoft)"/>
+      <rect x="340" y="319" width="26" height="30" rx="7" fill="url(#cellSoft)"/>
+    </g>
+
+    <!-- Column day-label dots in header -->
+    <circle cx="119" cy="168" r="4" fill="#e9d5ff" opacity="0.6"/>
+    <circle cx="167" cy="168" r="4" fill="#e9d5ff" opacity="0.6"/>
+    <circle cx="215" cy="168" r="4" fill="#e9d5ff" opacity="0.6"/>
+    <circle cx="263" cy="168" r="4" fill="#e9d5ff" opacity="0.6"/>
+    <circle cx="311" cy="168" r="4" fill="#e9d5ff" opacity="0.6"/>
+    <circle cx="354" cy="168" r="4" fill="#e9d5ff" opacity="0.4"/>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  MAGNIFYING GLASS — HANDLE                  -->
+    <!-- ─────────────────────────────────────────── -->
+    <g filter="url(#handleShadow)">
+      <line x1="351" y1="337" x2="416" y2="408"
+        stroke="url(#handleGrad)" stroke-width="34" stroke-linecap="round"/>
+      <!-- Handle highlight -->
+      <line x1="351" y1="337" x2="412" y2="403"
+        stroke="#c4b5fd" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+    </g>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  MAGNIFYING GLASS — LENS BODY               -->
+    <!-- ─────────────────────────────────────────── -->
+    <g filter="url(#lensGlow)">
+      <!-- Outer glow ring (animated) -->
+      <circle id="lensRimRing" cx="270" cy="265" r="120"
+        fill="none" stroke="#7c3aed" stroke-width="6" opacity="0.4"/>
+
+      <!-- Rim border — thick chrome purple -->
+      <circle cx="270" cy="265" r="112"
+        fill="none" stroke="url(#lensRim)" stroke-width="20"/>
+
+      <!-- Rim inner edge subtle bright -->
+      <circle cx="270" cy="265" r="100"
+        fill="none" stroke="#a78bfa" stroke-width="2" opacity="0.5"/>
+
+      <!-- Lens glass fill -->
+      <circle cx="270" cy="265" r="100" fill="url(#lensGrad)"/>
+
+      <!-- Glass inner highlight arc (top-left) -->
+      <path d="M 210 220 A 80 80 0 0 1 320 215"
+        fill="none" stroke="#ffffff" stroke-width="6"
+        stroke-linecap="round" opacity="0.15"/>
+    </g>
+
+    <!-- ─────────────────────────────────────────── -->
+    <!--  CLOCK FACE INSIDE LENS                     -->
+    <!-- ─────────────────────────────────────────── -->
+    <g clip-path="url(#lensClip)">
+      <!-- Clock face -->
+      <circle cx="270" cy="265" r="70" fill="url(#clockFace)"/>
+      <circle cx="270" cy="265" r="70"
+        fill="none" stroke="#6d28d9" stroke-width="2" opacity="0.6"/>
+
+      <!-- Hour ticks -->
+      <g stroke="#a78bfa" stroke-width="2.5" opacity="0.5">
+        <line x1="270" y1="200" x2="270" y2="210"/>
+        <line x1="270" y1="320" x2="270" y2="330"/>
+        <line x1="200" y1="265" x2="210" y2="265"/>
+        <line x1="330" y1="265" x2="340" y2="265"/>
+        <!-- Diagonal ticks -->
+        <line x1="214" y1="214" x2="221" y2="221"/>
+        <line x1="319" y1="214" x2="312" y2="221"/>
+        <line x1="214" y1="316" x2="221" y2="309"/>
+        <line x1="319" y1="316" x2="312" y2="309"/>
+      </g>
+
+      <!-- Center dot -->
+      <circle cx="270" cy="265" r="5" fill="#c4b5fd"/>
+
+      <!-- Hour hand -->
+      <g id="clockHour">
+        <line x1="270" y1="265" x2="270" y2="232"
+          stroke="#e9d5ff" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+      </g>
+
+      <!-- Minute hand -->
+      <g id="clockMinute">
+        <line x1="270" y1="265" x2="270" y2="216"
+          stroke="#a78bfa" stroke-width="3.5" stroke-linecap="round" opacity="0.95"/>
+      </g>
+
+      <!-- Center cap -->
+      <circle cx="270" cy="265" r="4" fill="#ddd6fe"/>
+    </g>
+
+  </g><!-- /floatGroup -->
+  </g><!-- /iconRoot -->
+
+</svg>
