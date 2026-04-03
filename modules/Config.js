@@ -13,7 +13,7 @@ export const Config = {
 
   // Ramadan Mode - Temporary schedule shifts for the holy month
   RAMADAN_MODE: {
-    ENABLED: true, // Set to true to activate shifts
+    ENABLED: false, // Set to true to activate shifts
     TIME_MAP: {
       "08:00 AM – 10:00 AM": "08:30 AM – 10:00 AM",
       "10:00 AM – 12:00 PM": "10:00 AM – 11:30 AM",
