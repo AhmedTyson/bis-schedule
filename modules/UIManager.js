@@ -21,7 +21,6 @@ export class UIManager {
       "page-numbers",
       "prev-page",
       "next-page",
-      "loader",
       "clear-filters",
       "meme-container",
       "no-results-text",
@@ -298,23 +297,12 @@ export class UIManager {
   }
 
   /**
-   * Toggles the loading state (skeletons or fade out).
+   * Toggles the loading state (skeletons).
    * @param {boolean} isLoading - True to show loaders, false to hide.
    */
   setLoading(isLoading) {
     if (isLoading) {
       this.#renderSkeletons();
-    } else {
-      // Hide full page loader if it exists
-      if (
-        this.#elements.loader &&
-        !this.#elements.loader.classList.contains("fade-out")
-      ) {
-        this.#elements.loader.classList.add("fade-out");
-        setTimeout(() => {
-          this.#elements.loader.classList.add("hidden");
-        }, 500); // Match CSS transition duration
-      }
     }
   }
 

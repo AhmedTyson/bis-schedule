@@ -23,65 +23,7 @@
       format("truetype");
 }
 
-/* Loader */
-/* Loader - Snow Effect */
-#loader {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  background: var(--bg-app);
-  background: radial-gradient(
-    circle at center,
-    var(--bg-panel) 0%,
-    var(--bg-app) 100%
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-#loader::after {
-  content: "LOADING";
-  margin-top: 24px;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  letter-spacing: 0.3em;
-  color: var(--text-muted);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.snowflake-spinner {
-  color: var(--accent);
-  filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.6));
-  animation: snow-spin 3s linear infinite;
-  display: inline-block;
-  transform-origin: center center;
-  font-size: 80px;
-}
-
-@keyframes snow-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 .error-message {
   color: var(--danger);
@@ -107,11 +49,7 @@
   border: 0;
 }
 
-.fade-out {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
+
 
 .fa-solid,
 .icon-svg {
