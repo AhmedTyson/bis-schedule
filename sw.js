@@ -1,6 +1,6 @@
-// BIS Schedule — Service Worker v6
+// BIS Schedule — Service Worker v7
 // Strategy: Stale-While-Revalidate for app shell, Network-First for data
-const CACHE_NAME = "bis-schedule-v6";
+const CACHE_NAME = "bis-schedule-v7";
 
 // App shell: modules, CSS, and local assets that form the core application.
 // These are cached on install and served from cache immediately.
@@ -37,11 +37,20 @@ const APP_SHELL = [
 
 // ─── INSTALL ─────────────────────────────────────────────
 // Pre-cache the app shell so the site works offline immediately.
+// Uses { cache: 'no-cache' } to bypass stubborn browser HTTP caching.
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_SHELL))
+      .then((cache) => {
+        return Promise.all(
+          APP_SHELL.map((url) =>
+            fetch(url, { cache: "no-cache" }).then((res) => {
+              if (res.ok) return cache.put(url, res);
+            })
+          )
+        );
+      })
       .then(() => self.skipWaiting()),
   );
 });
@@ -100,7 +109,8 @@ async function staleWhileRevalidate(request) {
   const cachedResponse = await cache.match(request);
 
   // Start network fetch in background (non-blocking)
-  const fetchPromise = fetch(request)
+  // Disable HTTP cache to ensure the SW cache gets the actual updated file
+  const fetchPromise = fetch(request, { cache: "no-cache" })
     .then((networkResponse) => {
       if (networkResponse.ok) {
         cache.put(request, networkResponse.clone());
