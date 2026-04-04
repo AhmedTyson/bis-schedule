@@ -21,6 +21,7 @@ export class UIManager {
       "page-numbers",
       "prev-page",
       "next-page",
+      "loader",
       "clear-filters",
       "meme-container",
       "no-results-text",
@@ -297,12 +298,15 @@ export class UIManager {
   }
 
   /**
-   * Toggles the loading state (skeletons).
+   * Toggles the loading state.
    * @param {boolean} isLoading - True to show loaders, false to hide.
    */
   setLoading(isLoading) {
     if (isLoading) {
+      if (this.#elements.loader) this.#elements.loader.classList.remove("hidden");
       this.#renderSkeletons();
+    } else {
+      if (this.#elements.loader) this.#elements.loader.classList.add("hidden");
     }
   }
 

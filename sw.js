@@ -1,6 +1,6 @@
-// BIS Schedule — Service Worker v5
+// BIS Schedule — Service Worker v6
 // Strategy: Stale-While-Revalidate for app shell, Network-First for data
-const CACHE_NAME = "bis-schedule-v5";
+const CACHE_NAME = "bis-schedule-v6";
 
 // App shell: modules, CSS, and local assets that form the core application.
 // These are cached on install and served from cache immediately.
